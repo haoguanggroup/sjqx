@@ -10,7 +10,6 @@ var log4js = require('./utils/log4js');
 var utils = require('./utils/utils');
 var syncOrmService=require('./service/syncOrmService');
 var commonService=require('./service/commonService');
-
 const logger=log4js.getLogger();
 const app = express();
 app.use(cookieParser());
