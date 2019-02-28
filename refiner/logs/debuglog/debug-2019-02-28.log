@@ -1,0 +1,100 @@
+[2019-02-28T14:15:41.123] [DEBUG] debug - 获取初始 sequelize
+[2019-02-28T14:15:42.229] [DEBUG] debug - 获取-----------sequelize
+[2019-02-28T14:15:42.267] [DEBUG] debug - 获取-----------sequelize
+[2019-02-28T14:15:42.315] [DEBUG] debug - 获取-----------sequelize
+[2019-02-28T14:15:42.518] [DEBUG] debug - 获取-----------sequelize
+[2019-02-28T14:15:42.566] [DEBUG] debug - 同步对象关系映射....
+[2019-02-28T14:15:42.567] [DEBUG] debug - 获取-----------sequelize
+[2019-02-28T14:15:42.801] [INFO] debug - 同步映射完成。
+[2019-02-28T14:15:42.803] [DEBUG] debug - 获取-----------sequelize
+[2019-02-28T14:15:42.804] [DEBUG] debug - 获取-----------sequelize
+[2019-02-28T14:15:42.812] [INFO] debug - start server:  http://localhost:3355
+[2019-02-28T14:16:32.641] [DEBUG] debug - 获取-----------sequelize
+[2019-02-28T14:16:32.645] [DEBUG] debug - 获取-----------sequelize
+[2019-02-28T14:16:32.649] [DEBUG] debug - 获取-----------sequelize
+[2019-02-28T14:16:32.649] [DEBUG] debug - 获取-----------sequelize
+[2019-02-28T14:16:32.677] [DEBUG] debug - 获取-----------sequelize
+[2019-02-28T14:16:32.679] [DEBUG] debug - 获取-----------sequelize
+[2019-02-28T14:16:32.689] [INFO] debug - [::ffff:127.0.0.1 GET /getDict/sjlx 200 26ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:16:32.690] [INFO] debug - [::ffff:127.0.0.1 GET /getDict/fxdj 200 17ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:16:32.859] [INFO] debug - [::ffff:127.0.0.1 GET /common/getObj/ywxx 200 203ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:16:32.860] [DEBUG] debug - allYwtz data-----> [{"label":"重大事项","id":"sjy2019021318431","type":"sjy","children":[{"label":"土地征税","id":"sf-2019022600191","type":"ywxx","children":[{"label":"业务流程","id":"ywhjsf-2019022600191","type":"all-ywhj","children":[{"label":"环节x","id":"hj-2019022604333","sxh":2,"type":"ywhj","ywbm":"sf-2019022600191","children":[]},{"label":"环节2","id":"hj-2019022601792","sxh":4,"type":"ywhj","ywbm":"sf-2019022600191","children":[]},{"label":"环节5","id":"hj-2019022604075","sxh":5,"type":"ywhj","ywbm":"sf-2019022600191","children":[]},{"label":"环节6","id":"hj-2019022602076","sxh":6,"type":"ywhj","ywbm":"sf-2019022600191","children":[]},{"label":"环节7","id":"hj-2019022600417","sxh":7,"type":"ywhj","ywbm":"sf-2019022600191","children":[]}]},{"label":"业务特征","id":"ywtzsf-2019022600191","type":"all-ywtz","children":[{"label":"特征1","id":"sx-2019022602144","type":"ywsx"}]}]}]},{"label":"公共资源交易","id":"sjy2019022502372","type":"sjy","children":[]},{"label":"互联网+政务","id":"sjy2019022504521","type":"sjy","children":[]},{"label":"refiner","id":"sjy2019022608722","type":"sjy","children":[{"label":"test","id":"sf-2019022605651","type":"ywxx","children":[{"label":"业务流程","id":"ywhjsf-2019022605651","type":"all-ywhj","children":[{"label":"环节1","id":"hj-2019022605462","sxh":1,"type":"ywhj","ywbm":"sf-2019022605651","children":[]},{"label":"环节2","id":"hj-2019022604913","sxh":2,"type":"ywhj","ywbm":"sf-2019022605651","children":[]},{"label":"环节3","id":"hj-2019022606344","sxh":3,"type":"ywhj","ywbm":"sf-2019022605651","children":[]}]}]}]}]
+[2019-02-28T14:16:32.865] [INFO] debug - [::ffff:127.0.0.1 GET /ywtz/query/allYwtz 200 229ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:16:32.877] [INFO] debug - [::ffff:127.0.0.1 GET /ds/query/dataSrc 200 198ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:16:32.883] [INFO] debug - [::ffff:127.0.0.1 GET /common/getObj/dscl 200 207ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:16:34.065] [INFO] debug - [::ffff:127.0.0.1 GET /common/getPager 200 3ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:16:34.069] [DEBUG] debug - 获取-----------sequelize
+[2019-02-28T14:16:34.074] [DEBUG] debug - 获取-----------sequelize
+[2019-02-28T14:16:34.074] [DEBUG] debug - 获取-----------sequelize
+[2019-02-28T14:16:34.076] [DEBUG] debug - 获取-----------sequelize
+[2019-02-28T14:16:34.076] [DEBUG] debug - 获取-----------sequelize
+[2019-02-28T14:16:34.080] [DEBUG] debug - 获取-----------sequelize
+[2019-02-28T14:16:34.091] [INFO] debug - [::ffff:127.0.0.1 GET /getDict/syssjlx 200 9ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:16:34.095] [INFO] debug - [::ffff:127.0.0.1 GET /getDict/bqlx 200 2ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:16:34.105] [INFO] debug - [::ffff:127.0.0.1 OPTIONS /mark/select/bqk 200 4ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:16:34.108] [INFO] debug - [::ffff:127.0.0.1 GET /getDict/bqlx 304 3ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:16:34.116] [INFO] debug - [::ffff:127.0.0.1 GET /common/allCsdm 200 47ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:16:34.120] [INFO] debug - 第一次初始化资源！！！
+[2019-02-28T14:16:34.122] [DEBUG] debug - 获取-----------sequelize
+[2019-02-28T14:16:34.140] [INFO] debug - [::ffff:127.0.0.1 GET /common/getObj/bqk 200 56ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:16:34.172] [DEBUG] debug - 获取初始 sequelize
+[2019-02-28T14:16:34.200] [DEBUG] debug - ---------------->[object Object],[object Object],[object Object],[object Object]
+[2019-02-28T14:16:34.204] [INFO] debug - [::ffff:127.0.0.1 GET /mark/query/dataSrc 200 131ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:16:34.433] [INFO] debug - [::ffff:127.0.0.1 POST /mark/select/bqk 200 216ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:16:34.493] [INFO] debug - [::ffff:127.0.0.1 POST /mark/select/bqk 200 101ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:16:34.497] [INFO] debug - [::ffff:127.0.0.1 POST /mark/select/bqk 200 107ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:16:34.500] [INFO] debug - [::ffff:127.0.0.1 POST /mark/select/bqk 200 107ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:16:34.531] [INFO] debug - [::ffff:127.0.0.1 POST /mark/select/bqk 200 136ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:16:34.538] [INFO] debug - [::ffff:127.0.0.1 POST /mark/select/bqk 200 101ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:16:34.557] [INFO] debug - [::ffff:127.0.0.1 POST /mark/select/bqk 200 56ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:16:34.560] [INFO] debug - [::ffff:127.0.0.1 POST /mark/select/bqk 200 57ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:16:34.576] [INFO] debug - [::ffff:127.0.0.1 POST /mark/select/bqk 200 58ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:16:34.698] [INFO] debug - 第一次初始化资源！！！
+[2019-02-28T14:16:34.699] [DEBUG] debug - 获取-----------sequelize
+[2019-02-28T14:16:34.740] [DEBUG] debug - 获取初始 sequelize
+[2019-02-28T14:16:35.079] [INFO] debug - 第一次初始化资源！！！
+[2019-02-28T14:16:35.081] [DEBUG] debug - 获取-----------sequelize
+[2019-02-28T14:16:35.116] [DEBUG] debug - 获取初始 sequelize
+[2019-02-28T14:16:35.430] [INFO] debug - 第一次初始化资源！！！
+[2019-02-28T14:16:35.433] [DEBUG] debug - 获取-----------sequelize
+[2019-02-28T14:16:35.467] [DEBUG] debug - 获取初始 sequelize
+[2019-02-28T14:16:35.785] [DEBUG] debug - ---------------->[object Object],[object Object],[object Object],[object Object]
+[2019-02-28T14:16:35.789] [INFO] debug - [::ffff:127.0.0.1 GET /mark/query/dataSrcYwbqdx 200 1710ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:16:36.590] [INFO] debug - [::ffff:127.0.0.1 GET /common/getPager 200 1ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:16:36.595] [DEBUG] debug - 获取-----------sequelize
+[2019-02-28T14:16:36.598] [DEBUG] debug - 获取-----------sequelize
+[2019-02-28T14:16:36.600] [DEBUG] debug - 获取-----------sequelize
+[2019-02-28T14:16:36.611] [INFO] debug - [::ffff:127.0.0.1 GET /getDict/syssjlx 200 9ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:16:36.617] [INFO] debug - [::ffff:127.0.0.1 GET /getDict/bqlx 200 3ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:16:36.630] [INFO] debug - [::ffff:127.0.0.1 GET /getDict/bqlx 304 2ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:16:36.636] [INFO] debug - [::ffff:127.0.0.1 GET /common/allCsdm 200 41ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:16:36.658] [INFO] debug - [::ffff:127.0.0.1 GET /common/getObj/bqk 200 54ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:16:36.661] [INFO] debug - 直接获取已存在的资源！！！
+[2019-02-28T14:16:36.674] [INFO] debug - [::ffff:127.0.0.1 POST /mark/select/bqk 200 54ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:16:36.694] [DEBUG] debug - ---------------->[object Object],[object Object],[object Object]
+[2019-02-28T14:16:36.700] [INFO] debug - [::ffff:127.0.0.1 GET /mark/query/dataSrc 200 102ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:16:36.704] [INFO] debug - 直接获取已存在的资源！！！
+[2019-02-28T14:16:36.744] [INFO] debug - 直接获取已存在的资源！！！
+[2019-02-28T14:16:36.836] [INFO] debug - 直接获取已存在的资源！！！
+[2019-02-28T14:16:36.840] [INFO] debug - [::ffff:127.0.0.1 POST /mark/select/bqk 200 53ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:16:36.867] [INFO] debug - [::ffff:127.0.0.1 POST /mark/select/bqk 200 66ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:16:36.881] [INFO] debug - [::ffff:127.0.0.1 POST /mark/select/bqk 200 75ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:16:36.882] [INFO] debug - [::ffff:127.0.0.1 POST /mark/select/bqk 200 79ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:16:36.893] [INFO] debug - [::ffff:127.0.0.1 POST /mark/select/bqk 200 82ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:16:36.895] [DEBUG] debug - ---------------->[object Object],[object Object],[object Object],[object Object]
+[2019-02-28T14:16:36.900] [INFO] debug - [::ffff:127.0.0.1 POST /mark/select/bqk 200 56ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:16:36.901] [INFO] debug - [::ffff:127.0.0.1 GET /mark/query/dataSrcYwbqdx 200 301ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:16:36.912] [INFO] debug - [::ffff:127.0.0.1 POST /mark/select/bqk 200 42ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:16:36.926] [INFO] debug - [::ffff:127.0.0.1 POST /mark/select/bqk 200 41ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:16:39.963] [INFO] debug - 直接获取已存在的资源！！！
+[2019-02-28T14:16:40.033] [INFO] debug - [::ffff:127.0.0.1 GET /mark/query/tableColumns?sjydm=sjy2019021318431&tableName=T_OS_BR 200 71ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:16:47.669] [INFO] debug - [::ffff:127.0.0.1 GET /getDict/fxdj 200 2ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:16:49.794] [INFO] debug - [::ffff:127.0.0.1 GET /getDict/sjylx 200 3ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:16:52.514] [INFO] debug - [::ffff:127.0.0.1 GET /getDict/wtqrlx 200 2ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:17:04.020] [INFO] debug - [::ffff:127.0.0.1 OPTIONS /mark/update 200 3ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:17:04.026] [INFO] debug - 直接获取已存在的资源！！！
+[2019-02-28T14:17:04.220] [ERROR] debug - { message: '该业务对象名称已经存在！' }
+[2019-02-28T14:17:04.224] [INFO] debug - [::ffff:127.0.0.1 POST /mark/update 200 200ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-02-28T14:17:04.250] [DEBUG] debug - 获取-----------sequelize
+[2019-02-28T14:17:04.333] [DEBUG] debug - ---------------->[object Object],[object Object],[object Object],[object Object]
+[2019-02-28T14:17:04.337] [INFO] debug - [::ffff:127.0.0.1 GET /mark/query/dataSrc 200 86ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]

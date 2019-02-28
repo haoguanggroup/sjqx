@@ -1,0 +1,139 @@
+[2019-01-04T12:10:46.663] [DEBUG] debug - 同步对象关系映射....
+[2019-01-04T12:10:46.670] [DEBUG] debug - 获取-----------sequelize
+[2019-01-04T12:10:46.832] [DEBUG] debug - 同步映射完成。
+[2019-01-04T12:10:46.836] [DEBUG] debug - start server:  http://localhost:3355
+[2019-01-04T12:11:08.111] [DEBUG] debug - 获取初始 sequelize
+[2019-01-04T12:11:08.317] [INFO] debug - [::ffff:127.0.0.1 GET /test/getAllUser 200 208ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-01-04T14:05:12.489] [DEBUG] debug - 同步对象关系映射....
+[2019-01-04T14:05:12.493] [DEBUG] debug - 获取-----------sequelize
+[2019-01-04T14:05:12.672] [INFO] debug - 同步映射完成。
+[2019-01-04T14:05:12.676] [DEBUG] debug - start server:  http://localhost:3355
+[2019-01-04T14:05:35.106] [INFO] debug - [::ffff:127.0.0.1 GET /test/getAllUser 500 24ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-01-04T14:09:04.361] [DEBUG] debug - 同步对象关系映射....
+[2019-01-04T14:09:04.366] [DEBUG] debug - 获取-----------sequelize
+[2019-01-04T14:09:04.578] [INFO] debug - 同步映射完成。
+[2019-01-04T14:09:04.583] [DEBUG] debug - start server:  http://localhost:3355
+[2019-01-04T14:09:08.225] [INFO] debug - [::ffff:127.0.0.1 GET /test/getAllUser 500 27ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-01-04T14:10:45.123] [DEBUG] debug - 同步对象关系映射....
+[2019-01-04T14:10:45.125] [DEBUG] debug - 获取-----------sequelize
+[2019-01-04T14:10:45.292] [INFO] debug - 同步映射完成。
+[2019-01-04T14:10:45.295] [DEBUG] debug - start server:  http://localhost:3355
+[2019-01-04T14:10:50.090] [INFO] debug - [::ffff:127.0.0.1 GET /test/getAllUser 500 23ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-01-04T14:10:56.012] [INFO] debug - [::ffff:127.0.0.1 GET /test/getPageInfo 500 10ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-01-04T14:14:51.911] [INFO] debug - [::ffff:127.0.0.1 GET /test/getPageInfo 500 8ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-01-04T14:15:58.892] [DEBUG] debug - 同步对象关系映射....
+[2019-01-04T14:15:58.895] [DEBUG] debug - 获取-----------sequelize
+[2019-01-04T14:15:59.072] [INFO] debug - 同步映射完成。
+[2019-01-04T14:15:59.077] [DEBUG] debug - start server:  http://localhost:3355
+[2019-01-04T14:16:10.782] [INFO] debug - [::ffff:127.0.0.1 GET /test/getPageInfo 500 19ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-01-04T14:16:19.594] [INFO] debug - [::ffff:127.0.0.1 GET /test/getAllUser 500 8ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-01-04T14:17:54.082] [DEBUG] debug - 同步对象关系映射....
+[2019-01-04T14:17:54.086] [DEBUG] debug - 获取-----------sequelize
+[2019-01-04T14:17:54.267] [INFO] debug - 同步映射完成。
+[2019-01-04T14:17:54.272] [DEBUG] debug - start server:  http://localhost:3355
+[2019-01-04T14:17:58.543] [DEBUG] debug - 获取初始 sequelize
+[2019-01-04T14:19:05.244] [DEBUG] debug - 获取-----------sequelize
+[2019-01-04T14:19:05.397] [DEBUG] debug - 用户关系模型未建立
+[2019-01-04T14:19:05.406] [DEBUG] debug - 同步对象关系映射....
+[2019-01-04T14:19:05.407] [DEBUG] debug - 获取初始 sequelize
+[2019-01-04T14:19:05.418] [INFO] debug - 同步映射完成。
+[2019-01-04T14:19:05.422] [DEBUG] debug - start server:  http://localhost:3355
+[2019-01-04T14:19:15.684] [INFO] debug - [::ffff:127.0.0.1 GET /test/getAllUser 500 26ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-01-04T14:19:18.081] [INFO] debug - [::ffff:127.0.0.1 GET /test/getAllUser 500 7ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-01-04T14:21:16.493] [DEBUG] debug - 同步对象关系映射....
+[2019-01-04T14:21:16.496] [DEBUG] debug - 获取-----------sequelize
+[2019-01-04T14:21:16.676] [INFO] debug - 同步映射完成。
+[2019-01-04T14:21:16.679] [DEBUG] debug - start server:  http://localhost:3355
+[2019-01-04T14:21:20.698] [DEBUG] debug - 获取初始 sequelize
+[2019-01-04T14:21:20.717] [INFO] debug - [::ffff:127.0.0.1 GET /test/getAllUser 500 23ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-01-04T14:21:44.310] [DEBUG] debug - 同步对象关系映射....
+[2019-01-04T14:21:44.314] [DEBUG] debug - 获取-----------sequelize
+[2019-01-04T14:21:44.460] [INFO] debug - 同步映射完成。
+[2019-01-04T14:21:44.464] [DEBUG] debug - start server:  http://localhost:3355
+[2019-01-04T14:21:55.850] [DEBUG] debug - 同步对象关系映射....
+[2019-01-04T14:21:55.853] [DEBUG] debug - 获取-----------sequelize
+[2019-01-04T14:21:56.001] [INFO] debug - 同步映射完成。
+[2019-01-04T14:21:56.006] [DEBUG] debug - start server:  http://localhost:3355
+[2019-01-04T14:22:00.731] [DEBUG] debug - 获取初始 sequelize
+[2019-01-04T14:22:04.049] [DEBUG] debug - 获取初始 sequelize
+[2019-01-04T14:22:11.098] [DEBUG] debug - 同步对象关系映射....
+[2019-01-04T14:22:11.104] [DEBUG] debug - 获取-----------sequelize
+[2019-01-04T14:22:11.332] [INFO] debug - 同步映射完成。
+[2019-01-04T14:22:11.335] [DEBUG] debug - start server:  http://localhost:3355
+[2019-01-04T14:22:36.934] [DEBUG] debug - 获取初始 sequelize
+[2019-01-04T14:22:38.413] [DEBUG] debug - 获取初始 sequelize
+[2019-01-04T14:24:38.414] [DEBUG] debug - 获取初始 sequelize
+[2019-01-04T14:25:03.078] [DEBUG] debug - 同步对象关系映射....
+[2019-01-04T14:25:03.082] [DEBUG] debug - 获取-----------sequelize
+[2019-01-04T14:25:03.272] [INFO] debug - 同步映射完成。
+[2019-01-04T14:25:03.277] [DEBUG] debug - start server:  http://localhost:3355
+[2019-01-04T14:25:05.989] [DEBUG] debug - 获取初始 sequelize
+[2019-01-04T14:25:06.221] [INFO] debug - [::ffff:127.0.0.1 GET /test/getAllUser 200 237ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-01-04T14:25:20.214] [INFO] debug - [::ffff:127.0.0.1 GET /test/getPagetINFO 404 10ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-01-04T14:25:24.365] [INFO] debug - [::ffff:127.0.0.1 GET /test/getPagetInfo 404 1ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-01-04T14:25:31.035] [INFO] debug - [::ffff:127.0.0.1 GET /test/getPageInfo 500 6ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-01-04T14:27:18.201] [DEBUG] debug - 同步对象关系映射....
+[2019-01-04T14:27:18.204] [DEBUG] debug - 获取-----------sequelize
+[2019-01-04T14:27:18.370] [INFO] debug - 同步映射完成。
+[2019-01-04T14:27:18.374] [DEBUG] debug - start server:  http://localhost:3355
+[2019-01-04T14:27:25.863] [INFO] debug - [::ffff:127.0.0.1 GET /test/getPageInfo 500 18ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-01-04T14:27:55.969] [INFO] debug - [::ffff:127.0.0.1 GET /test/getPageInfo 500 6ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-01-04T14:28:00.636] [DEBUG] debug - 同步对象关系映射....
+[2019-01-04T14:28:00.639] [DEBUG] debug - 获取-----------sequelize
+[2019-01-04T14:28:00.820] [INFO] debug - 同步映射完成。
+[2019-01-04T14:28:00.823] [DEBUG] debug - start server:  http://localhost:3355
+[2019-01-04T14:28:01.432] [INFO] debug - [::ffff:127.0.0.1 GET /test/getPageInfo 200 16ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-01-04T14:29:04.761] [DEBUG] debug - 同步对象关系映射....
+[2019-01-04T14:29:04.764] [DEBUG] debug - 获取-----------sequelize
+[2019-01-04T14:29:04.913] [INFO] debug - 同步映射完成。
+[2019-01-04T14:29:04.918] [DEBUG] debug - start server:  http://localhost:3355
+[2019-01-04T14:29:15.025] [INFO] debug - [::ffff:127.0.0.1 GET /test/getPageInfo 304 16ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-01-04T14:29:49.254] [DEBUG] debug - 同步对象关系映射....
+[2019-01-04T14:29:49.260] [DEBUG] debug - 获取-----------sequelize
+[2019-01-04T14:29:49.477] [INFO] debug - 同步映射完成。
+[2019-01-04T14:29:49.483] [DEBUG] debug - start server:  http://localhost:3355
+[2019-01-04T14:29:51.928] [INFO] debug - [::ffff:127.0.0.1 GET /test/getPageInfo 304 16ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-01-04T14:29:57.623] [INFO] debug - [::ffff:127.0.0.1 GET /test/getAllUser 500 19ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-01-04T14:34:04.013] [DEBUG] debug - 获取-----------sequelize
+[2019-01-04T14:34:04.228] [DEBUG] debug - 用户关系模型未建立
+[2019-01-04T14:34:04.234] [DEBUG] debug - 同步对象关系映射....
+[2019-01-04T14:34:04.235] [DEBUG] debug - 获取初始 sequelize
+[2019-01-04T14:34:04.242] [INFO] debug - 同步映射完成。
+[2019-01-04T14:34:04.246] [DEBUG] debug - start server:  http://localhost:3355
+[2019-01-04T14:34:14.731] [INFO] debug - [::ffff:127.0.0.1 GET /test/getAllUser 500 28ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-01-04T14:35:49.177] [DEBUG] debug - 同步对象关系映射....
+[2019-01-04T14:35:49.182] [DEBUG] debug - 获取-----------sequelize
+[2019-01-04T14:35:49.446] [INFO] debug - 同步映射完成。
+[2019-01-04T14:35:49.454] [DEBUG] debug - start server:  http://localhost:3355
+[2019-01-04T14:35:54.370] [INFO] debug - [::ffff:127.0.0.1 GET /test/getAllUser 500 22ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-01-04T14:35:55.688] [INFO] debug - [::ffff:127.0.0.1 GET /test/getAllUser 500 9ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-01-04T14:37:49.017] [DEBUG] debug - 同步对象关系映射....
+[2019-01-04T14:37:49.025] [DEBUG] debug - 获取-----------sequelize
+[2019-01-04T14:37:49.197] [INFO] debug - 同步映射完成。
+[2019-01-04T14:37:49.201] [DEBUG] debug - start server:  http://localhost:3355
+[2019-01-04T14:37:52.627] [DEBUG] debug - 获取初始 sequelize
+[2019-01-04T14:37:52.803] [INFO] debug - [::ffff:127.0.0.1 GET /test/getAllUser 200 180ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-01-04T14:38:09.197] [INFO] debug - [::ffff:127.0.0.1 GET /test/getPageInfo 304 2ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-01-04T14:38:43.319] [DEBUG] debug - 同步对象关系映射....
+[2019-01-04T14:38:43.322] [DEBUG] debug - 获取-----------sequelize
+[2019-01-04T14:38:43.488] [INFO] debug - 同步映射完成。
+[2019-01-04T14:38:43.491] [DEBUG] debug - start server:  http://localhost:3355
+[2019-01-04T14:38:46.993] [INFO] debug - [::ffff:127.0.0.1 GET /test/getPageInfo 304 11ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-01-04T14:38:51.154] [INFO] debug - [::ffff:127.0.0.1 GET /test/getAllUser 500 16ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-01-04T14:58:57.635] [DEBUG] debug - 同步对象关系映射....
+[2019-01-04T14:58:58.684] [DEBUG] debug - 获取-----------sequelize
+[2019-01-04T14:58:59.065] [INFO] debug - 同步映射完成。
+[2019-01-04T14:58:59.071] [DEBUG] debug - start server:  http://localhost:3355
+[2019-01-04T14:59:05.666] [DEBUG] debug - 获取初始 sequelize
+[2019-01-04T14:59:05.867] [INFO] debug - [::ffff:127.0.0.1 GET /test/getAllUser 200 203ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-01-04T15:12:01.044] [DEBUG] debug - 同步对象关系映射....
+[2019-01-04T15:12:01.048] [DEBUG] debug - 获取-----------sequelize
+[2019-01-04T15:12:01.281] [INFO] debug - 同步映射完成。
+[2019-01-04T15:12:01.286] [DEBUG] debug - start server:  http://localhost:3355
+[2019-01-04T15:12:15.107] [INFO] debug - [::ffff:127.0.0.1 GET /test/getPageInfo 304 16ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]
+[2019-01-04T15:34:49.150] [DEBUG] debug - 同步对象关系映射....
+[2019-01-04T15:34:49.154] [DEBUG] debug - 获取-----------sequelize
+[2019-01-04T15:34:49.374] [INFO] debug - 同步映射完成。
+[2019-01-04T15:34:49.378] [DEBUG] debug - start server:  http://localhost:3355
+[2019-01-04T15:35:06.654] [DEBUG] debug - 获取初始 sequelize
+[2019-01-04T15:35:06.863] [INFO] debug - [::ffff:127.0.0.1 GET /test/getAllUser 200 213ms][ HTTP/1.1 Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.80 Safari/537.36]

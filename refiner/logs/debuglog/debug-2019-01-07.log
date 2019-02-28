@@ -1,0 +1,4 @@
+[2019-01-07T10:58:09.751] [DEBUG] debug - 同步对象关系映射....
+[2019-01-07T10:58:09.759] [DEBUG] debug - 获取-----------sequelize
+[2019-01-07T10:58:10.463] [INFO] debug - 同步映射完成。
+[2019-01-07T10:58:10.473] [INFO] debug - start server:  http://localhost:3355
