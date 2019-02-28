@@ -1,4 +1,4 @@
-var express = require('express');
+﻿var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -15,6 +15,7 @@ const logger=log4js.getLogger();
 const app = express();
 app.use(cookieParser());
 log4js.useLogger(app,logger);
+
 app.use(session({
 	secret: 'keyboard cat',
 	resave: false,
