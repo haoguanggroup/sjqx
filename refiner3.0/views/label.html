@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>标签管理</title>
+    <link rel="stylesheet" href="../lib/element.min.css">
+    <link rel="stylesheet" href="../dist/css/label.css">  
+    <script src="../lib/public.js"></script>
+    <style>
+  body::-webkit-scrollbar {display:none} 
+            #app::-webkit-scrollbar {display:none}
+            /* .aside::-webkit-scrollbar {display:none}
+            .right::-webkit-scrollbar {display:none} */
+            form::-webkit-scrollbar {display:none}
+    </style>
+</head>
+<body>
+    <div id="app">
+            <h4 style='line-height: 20px;margin:10px 0 10px 0;width: 100%;'> <span style="display:inline-block;width:6px;height:16px;background: #ee303d;">&nbsp;</span>  &nbsp; 标签管理</h4>
+        <el-container>              
+            <el-aside class="aside" style="width: 20%">
+                <div>
+                    <div class="buttAdd">
+                        <el-button type="danger"  size="small" style="margin:10px 0 20px 0" @click="addBq" icon="el-icon-plus">新增标签</el-button>
+                    </div>
+                    <div>
+                        <el-tree class="filter-tree" :props="props1" @node-click="clickLabel"
+                         :load="loadNode1"
+                        lazy></el-tree>
+                        <!-- <el-tree class="filter-tree" :data="treeData" :props="defaultProps"  :filter-node-method="filterNode"
+                                ref="tree2" @node-click="open" :default-expand-all="true" default-expand-all>
+                        </el-tree> -->
+                    </div>                       
+                </div>
+            </el-aside> 
+            <el-main v-show="isShow" class="right">
+                <el-form :label-position="labelPosition" label-width="100px" :model="formLabelAlign">
+                    <el-form-item label="所属业务对象">
+                        <el-select v-model="ssywdx" multiple="multiple" placeholder="请选择业务对象" @change="getYwdxId">
+                            <el-option v-for="item in ssywdxList"  :key="item.key"  :label="item.label" :value="item.value" ></el-option>                            
+                        </el-select>
+                    </el-form-item> 
+               
+                    <el-form-item label="业务对象主键" prop="ywdxzj" v-show="showYwdx">
+                        <el-checkbox-group v-model="zj" @change="handleCheckedCitiesChange">
+                            <el-checkbox style="width: 15%" v-for="item in primaryList" :label="item.label" value="item.value"></el-checkbox>
+                        </el-checkbox-group>
+                    </el-form-item>  
+                    <el-form-item label="标签库">
+                            <template>
+                                <el-select v-model="bqk" multiple placeholder="请选择" @change="obtainLabel">
+                                    <el-option
+                                    v-for="item in historyList"
+                                    :key="item.bqbm"
+                                    :label="item.bqmc"
+                                    :value="item.bqbm">
+                                    </el-option>
+                                </el-select>
+                            </template> 
+                            <template>
+                                <el-button type="text" @click="addFormLabel">添加新标签</el-button>
+                            </template>
+                        </el-form-item> 
+                    <el-form-item  label="标签" v-show="showBq"> 
+                        <div style="display: flex">
+                            <el-button type="primary" size="small" plain disabled>修改</el-button>
+                            <el-button type="primary" size="small" plain disabled>减免</el-button>
+                            <el-button type="primary" size="small" plain disabled>退费</el-button>
+                            <el-button type="primary" size="small" plain disabled>其他</el-button>
+                        </div>
+                    </el-form-item>
+
+                    <div style="display: flex">
+                        <el-form-item label="创建人" style='width: 31.5%'>
+                            <el-input v-model="cjr" placeholder="admin" v-bind:readonly="true"></el-input>
+                        </el-form-item>
+                        <el-form-item label="创建时间" style='width:31.5%'>
+                            <el-input v-model="cjsj"  placeholder="2019-01-11 09:48:56" v-bind:readonly="true"></el-input>
+                        </el-form-item>
+                    </div>
+
+                    <el-dialog title="新增标签" :visible.sync="AddFormLabel" :close-on-click-modal="false">
+                        <el-form :model="addLabelFormData">	
+                                <el-form-item label="标签名称" style='width: 31.5%'>
+                                    <el-input v-model="addLabelFormData.bqmc" placeholder="请输入内容"></el-input>
+                                </el-form-item>
+                                <el-form-item label="标签参数代码" style='width: 31.5%'>
+                                    <!-- <el-select v-model="addLabelFormData.bqcsdm" placeholder="请选择标签参数代码" @change="selectBqcsdm">
+                                        <el-option v-for="addLabelFormData in bqcsdmList" :label="addLabelFormData.label" value="addLabelFormData.value" ></el-option>                            
+                                    </el-select> -->
+                                    <el-input v-model="addLabelFormData.dycsdm" placeholder="请输入内容"></el-input>
+                                </el-form-item> 
+                                <el-form-item label="对应文号" style='width: 63%'>
+                                    <el-input v-model="addLabelFormData.dywh" placeholder="请输入内容"></el-input>
+                                </el-form-item>      
+                                
+                                <el-form-item label="标签描述" style='width: 63%'>
+                                    <el-input type="textarea" v-model="addLabelFormData.bqms"></el-input>
+                                </el-form-item>
+                        </el-form>
+                        <div slot="footer" class="dialog-footer">
+                            <el-button type="primary" @click="submitLabel" >保 存</el-button>
+                        </div>
+                    </el-dialog>
+                       
+                    <el-form-item>
+                        <el-button size="small" type="primary" @click="onSubmit" icon="el-icon-document">保存</el-button>
+                        <el-button type="danger" size="small" style="margin-left: 100px" icon="el-icon-circle-close-outline">取消</el-button>
+                    </el-form-item>
+                </el-form>                
+            </el-main>
+
+            <el-main v-show="isShowBq" >
+                <el-form :label-position="labelPosition" label-width="100px" :model="formLabelAlign">
+                    <el-form-item label="所属业务对象" prop="ssywdx">
+                        <template>
+                            <el-select v-model="ssywdx" multiple placeholder="请选择">
+                                <el-option
+                                v-for="item in historyList"
+                                :key="item.bqbm"
+                                :label="item.bqmc"
+                                :value="item.bqbm">
+                                </el-option>
+                            </el-select>
+                        </template>
+                    </el-form-item>
+                    <el-form-item label="业务对象主键" prop="zj">
+                        <el-checkbox-group v-model="zj1">
+                            <el-checkbox label="审批业务数据表.业务流水号" name="zj" checked="checked"></el-checkbox>
+                            <el-checkbox label="审批业务数据表.事项ID" name="zj" checked="checked"></el-checkbox>
+                           
+                        </el-checkbox-group>
+                    </el-form-item>  
+                    <div style="display: flex">
+                        <el-form-item label="标签编码" style='width: 31.5%'>
+                            <el-input v-model="bqdm" placeholder="请输入内容"></el-input>
+                        </el-form-item>     
+                        <el-form-item label="标签名称" style='width: 31.5%'>
+                            <el-input v-model="bqmc" placeholder="请输入内容"></el-input>
+                        </el-form-item>  
+                    </div> 
+                    <el-form-item label="对应文号" style='width: 63%'>
+                        <el-input v-model="dywh" placeholder="请输入内容"></el-input>
+                    </el-form-item>      
+                    <el-form-item label="标签参数代码">
+                        <!-- <el-select v-model="bqcsdm" placeholder="冲正收费类型" @change="selectBqcsdm">
+                            <el-option v-for="bqcsdm in bqcsdmList" :label="bqcsdm.label" value="bqcsdm.value" ></el-option>                            
+                        </el-select> -->
+                        <el-input v-model="addLabelFormData.dycsdm" placeholder="请输入内容"></el-input>
+                    </el-form-item> 
+                    <el-form-item  label="标签"> 
+                        <div style="display: flex">
+                            <el-button type="primary" size="small" plain disabled>修改</el-button>
+                            <el-button type="primary" size="small" plain disabled>减免</el-button>
+                            <el-button type="primary" size="small" plain disabled>退费</el-button>
+                            <el-button type="primary" size="small" plain disabled>其他</el-button>
+                        </div>                      
+                    </el-form-item>
+                    <el-form-item label="标签描述" style='width: 63%'>
+                        <el-input type="textarea" v-model="bqms"></el-input>
+                    </el-form-item>
+                    <div style="display: flex">
+                        <el-form-item label="创建人" style='width: 31.5%'>
+                            <el-input v-model="cjr" placeholder="admin" v-bind:readonly="true"></el-input>
+                        </el-form-item>
+                        <el-form-item label="创建时间" style='width:31.5%'>
+                            <el-input v-model="cjsj"  placeholder="2019-01-11 09:48:56" v-bind:readonly="true"></el-input>
+                        </el-form-item>
+                    </div>
+                    
+                    <el-form-item>
+                        <el-button type="primary" @click="onSubmit" icon="el-icon-document">保存</el-button>
+                        <el-button type="danger" style="margin-left: 100px" icon="el-icon-circle-close-outline">取消</el-button>
+                    </el-form-item>
+                </el-form>                
+            </el-main>
+        </el-container>
+        <div style="height: 100px"></div>
+    </div>
+    <script src="../lib/vue.js"></script>
+    <script src="../lib/element.js"></script>
+    <script src="../lib/axios.min.js"></script>
+    <script src="../dist/js/build/label.js"></script>
+</body>
+</html>

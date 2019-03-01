@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Refiner&nbsp; v3.0</title>
+    <link href="lib/element.css" rel="stylesheet">
+    <link rel="stylesheet" href="dist/css/login.css">
+    <script src="lib/public.js"></script>
+    <style>    
+    </style>
+</head>
+<body>
+    <div id="app"> 
+        <el-row>
+            <el-col :span="14" id="left">
+                <el-container>
+                    <el-header class="logo"><img src="static/png/logo.png" alt=""></el-header>
+                    <el-main>
+                        <p class="p1">Refiner</p>
+                        <p class="p2"> 大数据提纯融合与标签管理平台  <span>v3.0</span></p>
+                    </el-main>
+                </el-container>
+            </el-col>
+            <el-col :span="10" id="right">
+                <el-header class="login">
+                    <label for="">没有账号?</label>
+                    <a href="" class="zhuce">
+                        <el-button class="registe">立即注册</el-button>
+                    </a>
+                </el-header>
+                <el-main>
+                    <form action="">
+                        
+                        <div class="box" :class="{active: showInput}"   >
+                            <span><img src="static/png/ren.png" alt=""></span>
+                            <el-input @focus="useraddColor" @blur="removeColor" id="name" v-model="user" placeholder="1203592314@qq.com">
+                            </el-input>
+                        </div>
+                        <div class="box" :class="{active: showPwd}" >
+                            <span><img src="static/png/ys.png" alt=""></span>
+                            <el-input @focus="pwdaddColor" @blur="removeColor" id="password"  @keyup.native.enter="open6" v-model="pwd" type="password" placeholder="请输入密码">
+                            </el-input>
+                        </div>
+                        <dd class="error_info" :class="{active1: isTrue}">
+                            <!-- <span v-text="errorInfo">用户名有误</span> -->
+                         </dd>
+                        <el-button id="login" plain  @click="open6" type="danger" style="color: white">登录</el-button>
+                        <p class="forget">忘记密码？</p>
+                    </form>
+                </el-main>
+            </el-col>
+        </el-row>
+    </div>
+    <script src="lib/vue.js"></script>
+    <script src="lib/element.js"></script>
+    <script src="lib/axios.min.js"></script>
+    <script src="lib/jquery-1.10.2.min.js"></script>
+    <script src="lib/md5.min.js"></script>
+
+<script src="dist/js/build/login.js">
+
+</script>
+</body>
+
+</html>

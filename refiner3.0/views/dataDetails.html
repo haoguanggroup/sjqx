@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数据详情</title>
+    <link rel="stylesheet" href="../lib/element.css">
+    <script src="../lib/public.js"></script>
+    <link rel="stylesheet" href="../dist/css/srcData.css">
+    <script src="../lib/axios.min.js"></script>
+    <script src="../lib/vue.js"></script>
+    <script src="../lib/element.js"></script>
+    <style>
+            body::-webkit-scrollbar {display:none} 
+                       #app::-webkit-scrollbar {display:none}
+                       .left::-webkit-scrollbar {display:none}
+                       .right::-webkit-scrollbar {display:none}
+                       form::-webkit-scrollbar {display:none}
+                       /* textarea::-webkit-scrollbar {display:none}
+                       .el-textarea::-webkit-scrollbar {display:none} */
+                       .up .el-input__inner{
+                               background: #AADFFD;
+                               border-color: #78C3F3;
+                               color: #004974;
+                              }
+                              /* textarea{
+                                overflow-x:hidden;overflow-y:hidden
+                              } */
+                              </style>
+</head>
+<body>
+    <div id="app">
+            <h4 style='line-height: 20px;margin:10px 0 10px 0;width: 100%;'> <span style="display:inline-block;width:6px;height:16px;background: #ee303d;">&nbsp;</span>  &nbsp; 任务监控</h4>
+            <el-container style="pading:0;width:100%;height:100%">
+                    <el-main style="overflow-y:auto">
+                            <el-form :inline="true" :model="selectJdmb" class="demo-form-inline" >
+                                <el-row>
+                                  <el-col :span="6">
+                                      <el-form-item label="处理文件名称:">
+                                            <el-input size="small" value="外出经营活动税收-start.ktr" :readonly="true"></el-input>
+                                      </el-form-item>
+                                  </el-col>
+                                  <el-col :span="6">
+                                      <el-form-item label="当前状态:">
+                                            <el-input size="small" value="执行完成" :readonly="true"></el-input>
+                                      </el-form-item>
+                                  </el-col>
+                                </el-row>
+								
+								<el-row>	
+									<el-col :span="6">
+										<el-form-item>
+											<img style="" src="../png/html.png"  alt="123"/>
+										</el-form-item>
+									</el-col>
+								</el-row>
+								
+								<el-row style="width: 100">
+                                  <el-button ><a style="text-decoration:none;color:color" href="srcDataDetails.html">返回</a></el-button>
+								  <el-button type="primary">运行/刷新</el-button>
+                                </el-row>
+                          <textarea :readonly="true" style="width: 100%; height: 800px">2019/01/10 10:48:42 - Spoon - 正在开始任务...
+2019/01/10 10:48:44 - SJZFC - 开始执行任务
+2019/01/10 10:48:44 - SJZFC - 开始项[准备数据]
+2019/01/10 10:48:44 - 准备数据 - Loading transformation from XML file [F:\work\kettleWork\SJZFC.ktr]
+2019/01/10 10:48:44 - 准备数据 - Using run configuration [Pentaho local]
+2019/01/10 10:48:44 - 准备数据 - Using legacy execution engine
+2019/01/10 10:48:44 - SJZFC - 为了转换解除补丁开始  [SJZFC]
+2019/01/10 10:48:44 - 生成随机数.0 - 完成处理 (I=0, O=0, R=1, W=1, U=0, E=0)
+2019/01/10 10:48:44 - 文本文件输出.0 - 完成处理 (I=0, O=1, R=1, W=1, U=0, E=0)
+2019/01/10 10:48:44 - SJZFC - 开始项[初始化变量]
+2019/01/10 10:48:44 - 初始化变量 - Loading transformation from XML file [F:\work\kettleWork\SJZFC.ktr]
+2019/01/10 10:48:44 - 初始化变量 - Using run configuration [Pentaho local]
+2019/01/10 10:48:44 - 初始化变量 - Using legacy execution engine
+2019/01/10 10:48:44 - SJZFC - 为了转换解除补丁开始  [SJZFC]
+2019/01/10 10:48:44 - 生成随机数.0 - 完成处理 (I=0, O=0, R=1, W=1, U=0, E=0)
+2019/01/10 10:48:44 - 文本文件输出.0 - 完成处理 (I=0, O=1, R=1, W=1, U=0, E=0)
+2019/01/10 10:48:44 - SJZFC - 开始项[生成标签-预警状态]
+2019/01/10 10:48:44 - 生成标签-预警状态 - Loading transformation from XML file [F:\work\kettleWork\SJZFC.ktr]
+2019/01/10 10:48:44 - 生成标签-预警状态 - Using run configuration [Pentaho local]
+2019/01/10 10:48:44 - 生成标签-预警状态 - Using legacy execution engine
+2019/01/10 10:48:44 - SJZFC - 为了转换解除补丁开始  [SJZFC]
+2019/01/10 10:48:44 - 生成随机数.0 - 完成处理 (I=0, O=0, R=1, W=1, U=0, E=0)
+2019/01/10 10:48:44 - 文本文件输出.0 - 完成处理 (I=0, O=1, R=1, W=1, U=0, E=0)
+2019/01/10 10:48:44 - SJZFC - 开始项[成功]
+2019/01/10 10:48:44 - SJZFC - 完成作业项[成功] (结果=[true])
+2019/01/10 10:48:44 - SJZFC - 完成作业项[生成标签-预警状态] (结果=[true])
+2019/01/10 10:48:44 - SJZFC - 开始项[生成标签-是否超期]
+2019/01/10 10:48:44 - 生成标签-是否超期 - Loading transformation from XML file [F:\work\kettleWork\SJZFC.ktr]
+2019/01/10 10:48:44 - 生成标签-是否超期 - Using run configuration [Pentaho local]
+2019/01/10 10:48:44 - 生成标签-是否超期 - Using legacy execution engine
+2019/01/10 10:48:44 - SJZFC - 为了转换解除补丁开始  [SJZFC]
+2019/01/10 10:48:44 - 生成随机数.0 - 完成处理 (I=0, O=0, R=1, W=1, U=0, E=0)
+2019/01/10 10:48:44 - 文本文件输出.0 - 完成处理 (I=0, O=1, R=1, W=1, U=0, E=0)
+2019/01/10 10:48:44 - SJZFC - 开始项[成功]
+2019/01/10 10:48:44 - SJZFC - 完成作业项[成功] (结果=[true])
+2019/01/10 10:48:44 - SJZFC - 完成作业项[生成标签-是否超期] (结果=[true])
+2019/01/10 10:48:44 - SJZFC - 开始项[设置计算规则]
+2019/01/10 10:48:44 - 设置计算规则 - Loading transformation from XML file [F:\work\kettleWork\SJZFC.ktr]
+2019/01/10 10:48:44 - 设置计算规则 - Using run configuration [Pentaho local]
+2019/01/10 10:48:44 - 设置计算规则 - Using legacy execution engine
+2019/01/10 10:48:44 - SJZFC - 为了转换解除补丁开始  [SJZFC]
+2019/01/10 10:48:44 - 生成随机数.0 - 完成处理 (I=0, O=0, R=1, W=1, U=0, E=0)
+2019/01/10 10:48:44 - 文本文件输出.0 - 完成处理 (I=0, O=1, R=1, W=1, U=0, E=0)
+2019/01/10 10:48:44 - SJZFC - 开始项[生成标签-网上办理深度]
+2019/01/10 10:48:44 - 生成标签-网上办理深度 - Loading transformation from XML file [F:\work\kettleWork\SJZFC.ktr]
+2019/01/10 10:48:44 - 生成标签-网上办理深度 - Using run configuration [Pentaho local]
+2019/01/10 10:48:44 - 生成标签-网上办理深度 - Using legacy execution engine
+2019/01/10 10:48:44 - SJZFC - 为了转换解除补丁开始  [SJZFC]
+2019/01/10 10:48:44 - 生成随机数.0 - 完成处理 (I=0, O=0, R=1, W=1, U=0, E=0)
+2019/01/10 10:48:44 - 文本文件输出.0 - 完成处理 (I=0, O=1, R=1, W=1, U=0, E=0)
+2019/01/10 10:48:44 - SJZFC - 开始项[成功]
+2019/01/10 10:48:44 - SJZFC - 完成作业项[成功] (结果=[true])
+2019/01/10 10:48:44 - SJZFC - 完成作业项[生成标签-网上办理深度] (结果=[true])
+2019/01/10 10:48:44 - SJZFC - 完成作业项[设置计算规则] (结果=[true])
+2019/01/10 10:48:44 - SJZFC - 完成作业项[初始化变量] (结果=[true])
+2019/01/10 10:48:44 - SJZFC - 完成作业项[准备数据] (结果=[true])
+2019/01/10 10:48:44 - SJZFC - 任务执行完毕
+2019/01/10 10:48:44 - Spoon - 任务已经结束.
+                            </textarea>
+                            </el-form>
+                    </el-main>
+                  
+                </el-container>
+    </div>
+    <script src="../dist/js/build/srcDataDetails.js"></script>
+   
+</body>
+</html>

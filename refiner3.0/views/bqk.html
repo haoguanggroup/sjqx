@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../lib/element.css">
+    <script src="../lib/public.js"></script>
+    <link rel="stylesheet" href="../dist/css/data.css">
+    <script src="../lib/axios.min.js"></script>
+    <script src="../lib/vue.js"></script>
+    <script src="../lib/element.js"></script>
+    <style >
+     .el-table th,.el-table th>.cell{
+                color: #666;
+                background: #e4e8f2;
+                    line-height: 30px;  
+                    text-align: center;                 
+            }
+    
+                .el-pagination{
+               text-align: center;
+            }
+            .el-main{
+                margin: 0;
+                padding: 0;
+            }
+            .el-form{
+                height: 40px;
+            }
+            .el-row,.el-row div{
+                height: 40px;
+            }
+            .left {
+                float: left;
+            }
+            .right {   
+                width: 75%; 
+                float: right;
+               
+            }
+            .itemMenu {
+              margin-top: -5px;
+              margin-right: 30px;
+            }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <h4 style='width: 100%;margin: 0 0 10px 0'> 
+                <span style="display:inline-block;width:6px;height:16px;background: #ee303d;">&nbsp;</span>  &nbsp; 标签库管理</h4>        
+            <hr class="hr5">    
+            <div class="left" style="width:24%">
+                <el-menu class="el-menu-vertical-demo"  @select="handleOpen_bqlx" @open="handleOpen_bqlx"  @close="handleOpen_bqlx">
+                    <!-- <el-submenu index=""> -->
+                        <!-- <template slot="title">
+                            <i class="el-icon-menu"></i>
+                            <span>标签类型</span>
+                        </template> -->
+                        <el-menu-item v-for="item in bqkPage.bqlx" :index="item.zdm">
+                                <i class="el-icon-menu"></i>                               
+                                    <span> {{item.zmc}}</span>
+                                    <el-badge  class="itemMenu" :type="item.count==0 ? 'primary' : 'danger'" :value="item.count" />
+                                </el-badge>
+                        </el-menu-item>  
+                    <!-- </el-submenu> -->
+                </el-menu>
+            </div> 
+            <div class="right" >
+               
+                <el-form :inline="true" :model="bqkPage.bqkcx" class="demo-form-inline">
+                    <el-row>
+                        <el-col :span="5">
+                            <el-form-item label="标签名称">
+                                <el-input size="small" v-model="bqkPage.bqkcx.bqmc" placeholder="标签名称" ></el-input>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :span="5">
+                            <el-form-item label="对应文号">
+                                <el-input size="small" v-model="bqkPage.bqkcx.dywh" placeholder="对应文号"></el-input>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :span="7">
+                            <el-form-item label="对应参数代码">
+                                
+                                <el-select v-model="bqkPage.bqkcx.dycsdm" placeholder="请选择">
+                                    <el-option v-for="item in bqkPage.csdms" :key="item.csdm" :label="item.csmc" :value="item.csdm"></el-option>
+                                </el-select>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :span="7" style="text-align:right">
+                            <el-form-item style="margin-left: 40px">
+                                <el-button size="small" type="danger el-button--100" @click="execBqk('selectBqk')" icon="el-icon-search">查询</el-button>
+                                <el-button size="small" type="danger el-button--100" @click="execBqk('newLable')" icon="el-icon-plus" size="small">新增标签</el-button> 
+                                <el-button size="small" type="danger el-button--100" onclick="location.href='mark.html'" icon="el-icon-arrow-right">标签管理</el-button>
+                            </el-form-item>
+                        </el-col>
+                    </el-row>
+                </el-form>
+                <hr style="border: 0px;
+                height: 1px;
+                border-top: 2px solid #f6f6f3;margin-top: 15px">
+                <el-table :data="bqkPage.bqkData" border  style="width:100%" size="mini">
+                    <el-table-column prop="bqbm" label="标签编码"></el-table-column>
+                    <el-table-column prop="bqmc" label="标签名称"  :show-overflow-tooltip="true"></el-table-column>
+                    <el-table-column prop="bqms" label="标签描述" :show-overflow-tooltip="true"></el-table-column>
+                    <el-table-column prop="dycsdm" label="对应参数代码"></el-table-column>
+                    <el-table-column prop="dywh" label="对应文号" ></el-table-column>
+                    <el-table-column prop="bqlx" label="标签类型" ></el-table-column>                                	
+                    <el-table-column prop="cjr" label="创建人"></el-table-column>
+                    <el-table-column prop="cjsj" label="创建时间" width="180"></el-table-column>
+                
+                    <el-table-column prop="" label="操作" width="140" >
+                        <template slot-scope="scope">
+                            <el-button type="text" size="small" style="color:#409EFF;" @click="execBqk('editBq',scope.row)">编辑</el-button>
+                                <el-button type="text" size="small" style="color:#409EFF;" @click="execBqk('showBq',scope.row)">查看</el-button>
+                          
+                            <el-button type="text" size="small" style="color:#409EFF;" @click="execBqk('deleteBq',scope.row)">删除</el-button>
+
+                        </template>
+                    </el-table-column>
+                </el-table>
+                <!-- 分页 -->
+                <el-pagination
+                    @size-change="handleSizeChangeBqk"
+                    @current-change="handleCurrentChangeBqk"
+                    :page-sizes="bqkPage.pager.selPageSize"
+                    :page-size="bqkPage.pager.pageSize"
+
+                    layout="total, sizes, prev, pager, next, jumper"
+                    :total="bqkPage.pager.total"
+                ></el-pagination>
+                <!-- <hr> -->
+            </div>
+
+            <div style="height: 80px"></div>
+                           
+            <el-dialog :title="bqkPage.dialogTitle" :visible.sync="bqkPage.bqkDialogVisible" :close-on-click-modal="false">
+                <el-form :model="bqkPage.bq" style="height: 100%" >
+                    
+                <el-form-item label="标签编码" :label-width="bqkPage.formLabelWidth" style="width: 90%">
+                        <el-input v-model="bqkPage.bq.bqbm" disabled></el-input>
+                </el-form-item>
+                <el-form-item label="标签名称" :label-width="bqkPage.formLabelWidth" style="width: 90%">
+                        <el-input v-model="bqkPage.bq.lsh" style="display:none;" ></el-input>
+                        <el-input v-model="bqkPage.bq.cjr" style="display:none;" ></el-input>
+                        <el-input v-model="bqkPage.bq.cjsj" style="display:none;" ></el-input>
+                        <el-input v-model="bqkPage.bq.yxbz" style="display:none;" ></el-input>
+                        <el-input v-model="bqkPage.bq.bqmc" maxlength="60"></el-input>
+                    </el-form-item>
+                    <el-form-item label="标签描述" :label-width="bqkPage.formLabelWidth" style="width: 90%">
+                        <el-input v-model="bqkPage.bq.bqms" maxlength="500"></el-input>
+                    </el-form-item>
+                    <el-form-item label="对应文号" :label-width="bqkPage.formLabelWidth" style="width: 90%">
+                        <el-input v-model="bqkPage.bq.dywh" maxlength="200"></el-input>
+                    </el-form-item>
+                    <el-form-item label="标签类型" :label-width="bqkPage.formLabelWidth" style="width: 90%">
+                        <el-select v-model="bqkPage.bq.bqlx" placeholder="请选择">
+                            <el-option v-for="item in bqkPage.ksbqlx" :key="item.zdm" :label="item.zmc" :value="item.zdm"></el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item label="对应参数代码" :label-width="bqkPage.formLabelWidth" style="width: 90%">
+                        <el-select v-model="bqkPage.bq.dycsdm" placeholder="请选择" @change="changeCsdm">
+                            <el-option v-for="item in bqkPage.csdms" :key="item.csdm" :label="item.csmc" :value="item.csdm"></el-option>
+                        </el-select>
+                    </el-form-item>
+                    <el-form-item label="参数值" v-show="bqkPage.kscsz.length>0">
+                        <el-tag v-for="item in bqkPage.kscsz" type="danger">({{item.zdm}}){{item.zmc}}</el-tag>
+                    </el-form-item>
+                                
+                    
+                </el-form>
+                <div slot="footer" class="dialog-footer" style="width: 100%">
+                    <el-button @click="bqkPage.bqkDialogVisible = false;" size="small" >关 闭</el-button>
+                    <el-button type="primary" v-show="!bqkPage.olnyShow" @click="execBqk('saveorupdate')" size="small"  >确 定</el-button>
+                </div>
+            </el-dialog>
+        </div>
+    </div>
+    <script src="../dist/js/build/mark.js"></script>
+   
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Refiner&nbsp; v3.0</title>
+    <link href="lib/element.css" rel="stylesheet">
+    <link rel="stylesheet" href="dist/css/refiner.css">
+    <style>
+      body::-webkit-scrollbar {display:none} 
+      #app::-webkit-scrollbar {display:none}
+      .left::-webkit-scrollbar {display:none}
+      .right::-webkit-scrollbar {display:none}
+      form::-webkit-scrollbar {display:none}
+      .up .el-input__inner{
+              background: #AADFFD;
+              border-color: #78C3F3;
+              color: #004974;
+             
+      }
+    </style>
+       
+</head>
+<body style="width: 100%">
+    <div id="app">
+        <el-header style="height:8%;padding:0">
+             <el-menu class="el-menu-demo" mode="horizontal">
+               <el-row>
+                   <el-col :xs="2" :sm="3" :md="2" :lg="2" :xl="2">
+                       <el-radio-group v-model="isCollapse">
+                           <el-radio-button class="nav-oper" :label="!isCollapse"><img src="static/img/nav.png"></el-radio-button>
+                           <!-- <el-radio-button :label="false"><img src="img/nav.png"></el-radio-button>
+                           <el-radio-button :label="true"><i class="el-icon-minus"></i></el-radio-button> -->
+                       </el-radio-group>
+                   </el-col>
+                   <el-col :xs="20" :sm="19" :md="19" :lg="20" :xl="21"><div class="grid-content"><img style="" class="logo" src="static/img/logo.png"> Refiner 数据提纯融合与标签管理平台 V3.0</div></el-col>
+                   <!-- <el-col :xs="2" :sm="2" :md="1" :lg="2" :xl="1" style="border-left:1px solid #edeef0;">
+                       <el-badge is-dot class="item"><img style="margin-left:35px" src="static/img/menu7.png"></el-badge>
+                   </el-col> -->
+                   <el-col :xs="2" :sm="2" :md="3" :lg="2" :xl="1">
+                       <el-submenu index="2" style="border-left:1px solid #edeef0;float: right;margin-right: 40px">
+                         <template slot="title"><img style="" class="user" src="static/img/user.png"><i style="display:inline-block;margin-top:15px;width: 50px;">{{this.username}}</i></template>
+                         <!-- <el-menu-item index="2-1" v-show="isShow">登录</el-menu-item>
+                         <el-menu-item index="2-2" v-show="isShow">注册</el-menu-item> -->
+                         <el-menu-item index="2-3"  @click="logout">退出</el-menu-item>
+                       </el-submenu>
+                   </el-col>
+                     <!-- <el-col :xs="1" :sm="1" :md="1" :lg="1" :xl="1"></el-col> -->
+               </el-row>
+             </el-menu>		
+         </el-header>
+             <div style="display:flex;z-index:999">
+                 <el-container style="position:fixed;left:0;height: 92%;z-index:9;top:102px">
+             <el-menu  default-active="1" style="" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse" >
+               
+                    <el-menu-item index="1" @click="homeShow"> 
+                        <img src="static/img/menu1.png">
+                        <span slot="title" >系统配置</span>
+                    </el-menu-item>
+            
+                   <el-menu-item index="7" @click="dataSrcShow">
+                     <img src="static/img/menu6.png"/>
+                     <span slot="title" >数据源</span>
+                  </el-menu-item>
+               
+                   <el-menu-item index="2" @click="ywtzShow">
+                     <img src="static/img/menu2.png">
+                     <span slot="title">业务特征</span>
+                   </el-menu-item>
+               
+                    <el-menu-item index="3" @click="bqkShow">
+                        <img src="static/img/menu3.png">
+                        <span slot="title">标签库管理</span>
+                      </el-menu-item>               
+                   <el-menu-item index="4" @click="srcDataDetailsShow">
+                     <img src="static/img/menu4.png"  >
+                     <span slot="title">任务监控</span>
+                   </el-menu-item>
+                   <el-menu-item index="5" @click="srcDataShow">
+                     <img src="static/img/menu5.png">   
+                     <span slot="title">码值管理</span>
+                   </el-menu-item>
+                
+                   <el-menu-item index="8" style="position:absolute;bottom:5%;width:100%" @click="logout">
+                     <img src="static/img/logout.png">
+                     <span slot="title">退出</span>
+                   </el-menu-item>
+             </el-menu>
+         </el-container>
+             <!-- <router-view style="position:absolute;left:100px;width:96%;height:98%"></router-view> -->
+             <div style="position:absolute;left:100px;width:100%;height:92%;" v-show="isShowHome">
+               
+                <iframe style="width:100%;height: 100%;background: #f5f6fa;padding: 25px 120px 70px 25px" name="myiframe" id="myrame1" :src=this.getUrl() frameborder="0"  scrolling="no">
+                    <p>你的浏览器不支持iframe标签</p>
+                </iframe>
+             </div>
+             </div>
+         
+               <el-footer  style="height:40px;position:absolute;bottom:0;font-size:12px;color:#999;left:45%;line-height: 40px">copyright&reg;chinobot.com</el-footer>
+       </div>
+       <!-- <template id="label">
+            <div>biaoqian</div>
+        </template>
+        <template id="home">
+            <h1>zhuye</h1>
+        </template> -->
+        
+       <script src="lib/vue.js"></script>
+       <script src="lib/element.js"></script>
+       <script src="lib/axios.min.js"></script>
+       <!-- <script src="https://cdn.bootcss.com/vue-router/3.0.2/vue-router.js"></script> -->
+       <script src="dist/js/build/refiner.js">
+        //   var Home = Vue.extends({
+        //        template:'#label',
+        //        data(){
+        //            return{
+                       
+        //            }
+        //        }
+        //    });
+        //    var router = new VueRouter();
+        //    router.map({
+        //        '/':{component:Home},
+        //        '/label':{component:Label},
+        //        '*':{component:notFound}
+        //    })
+        //    var app = Vue.extend({})
+        //    router.start(app,'#app')
+
+
+        
+//         var label = {
+//  template:"#label"
+//         }
+//         var home = {
+//             template:'#home'
+//         }
+// var Label = new VueRouter({
+//     routes:[                  //路由匹配规则
+//         {path:'/label',  //path表示监听哪个路由链接地址
+
+//         component:label},     //component表示 如果路由是前面匹配到的path，则展示component属性对应的那个组件
+//         {
+//             path:'/home',
+//             component:home
+//         }
+//     ]
+// })
+      
+   
+       </script>
+    
+           
+       
+</body>
+</html>

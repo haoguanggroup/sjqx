@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Document</title>
+<link rel="stylesheet" href="../lib/element.min.css">
+<link rel="stylesheet" href="../dist/css/business.css">
+<script src="../lib/public.js"></script>
+</head>
+<style>
+body::-webkit-scrollbar {
+	display: none
+}
+
+#app::-webkit-scrollbar {
+	display: none
+}
+
+form::-webkit-scrollbar {
+	display: none
+}
+
+.up .el-input__inner {
+	background: #AADFFD;
+	border-color: #78C3F3;
+	color: #004974;
+}
+
+th .cell, tr {
+	text-align: center
+}
+
+.el-table--enable-row-hover .el-table__body tr:hover>td {
+	background-color: #ccc !important;
+}
+
+.el-form-item__content {
+	margin-left: 10px;
+}
+
+h4 {   
+	margin-bottom: 10px;
+}
+
+.file {
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	opacity: 0;
+}
+</style>
+
+<body>
+	<div id="app">
+		<div class="addBtn">
+			<el-button style="background: #f56c6c;color: #fff" type="danger"
+				icon="el-icon-plus" size="small" plain @click="addBusiness">新增业务</el-button>
+			<el-button style="background: #f56c6c;color: #fff" type="danger"
+				icon="el-icon-plus" size="small" plain @click="addFeature">新增特征</el-button>
+			<el-button style="background: #f56c6c;color: #fff" type="danger"
+				icon="el-icon-plus" size="small" plain @click="addLink">新增环节</el-button>
+		</div>
+		<h4 style='line-height: 20px; margin: 0px 0 10px 0; width: 100%; position: fixed'>
+			<span style="display: inline-block; width: 6px; height: 16px; background: #ee303d;">&nbsp;</span>
+			&nbsp; 业务特征
+		</h4>
+		<div class="left">
+			<el-tree class="filter-tree" :data="treeData" :props="defaultProps"
+                                ref="tree2" @node-click="open" accordion> 
+			</el-tree>
+		</div>
+   <div class="right">
+        <!-- 业务表单 -->
+        <el-form  ref="form" :model="businessForm" label-width="80px" v-show="businessFormShow">
+            <!-- <h4>新增业务</h4> -->
+            <el-form-item label="所属系统">
+                    <el-input v-model="businessForm.ssxt" :disabled="true"></el-input>
+            </el-form-item>
+            <el-form-item style="display:none" label="流水号">
+                    <el-input v-model="businessForm.lsh"></el-input>
+            </el-form-item>
+            <el-form-item label="业务编码">
+                    <el-input v-model="businessForm.bm" :disabled="true"></el-input>
+            </el-form-item>
+            <el-form-item label="业务名称">
+                    <el-input v-model="businessForm.mc"></el-input>
+            </el-form-item>
+
+            <el-form-item label="创建人">
+                    <el-input v-model="businessForm.cjr" :disabled="true"></el-input>
+            </el-form-item>
+            <el-form-item label="创建时间">
+                    <el-input v-model="businessForm.cjsj" :disabled="true"></el-input>
+            </el-form-item>
+            </el-form-item>
+            <el-form-item label="">
+
+                    <el-button style="position: relative;" size="small" type="primary" icon="el-icon-upload2">上传处理文件
+                            <!-- <input id="linkfile" class="file" type="file" name="inputFile" multiple="multiple" accept="ktr"
+                                    @change="uploadConfig" /> -->   
+                                    <form class="file"  id="pform" action="" style="width: 100%;height: 0px;" v-if="isShowForm">
+                                        <input style="height:31px;width: 100%;" type ="file" name="inputFile" id="inputFile" multiple="multiple" @change="uploadConfig"/>
+                                        <input style="display:none;height: 0;" type="text" id="sslxbm" name='sslxbm' />
+                                    </form>                          
+                                        <!-- <input type ="button" value="上传-axios" @click="testUpload"/> -->
+                               
+                                </el-button>
+                    <!-- <el-button tyle="display: none" size="small" type="primary" v-show="isShowTable" icon="el-icon-download"
+                            @click="download">下载已选择的文件</el-button> -->
+
+            </el-form-item>
+            <el-form-item label="" v-show="isShowTable" label-width="10">
+                    <el-table size="small" ref="singleTable" :data="tableData3"
+                            highlight-current-row @current-change="handleCurrentChange" @row-click="showRow"
+                            style="width: 100%;color:#666" :row-style="tableRowStyle"
+                            :header-cell-style="tableHeaderColor" :stripe="false" border
+                            label-width="10">
+                            <!-- <el-table-column type="selection" width="55">
+                            </el-table-column> -->
+                            <el-table-column prop="fileName" label="文件名称" width="190">
+                                <!-- <template slot-scope="scope">{{ scope.row.date }}</template> -->
+                        </el-table-column>
+                        <!-- <el-table-column prop="lsh" label="流水号" width="190"  style="display: none" >             
+                        </el-table-column>
+                            <el-table-column prop="clwjbm" label="处理文件编码" width="190" style="display: none">
+                                  
+                            </el-table-column> -->
+                            <el-table-column prop="status" label="状态" width="180">
+                                    <template slot-scope="scope">
+                                            <el-tag size="medium" :type="scope.row.status ==='已经上传'?'success':'danger'">{{
+                                                    scope.row.status }}</el-tag>
+                                    </template>
+                            </el-table-column>
+                            <el-table-column prop="start" label="是否启动" width="80">
+                                    <template scope="scope">
+                                            <el-radio class="radio" v-model="radio" :label="scope.row.fileName"
+                                                    @change.native="getCurrentRow(scope.$index,scope.row)">&nbsp;</el-radio>
+                                    </template>
+
+                            </el-table-column>
+                            <el-table-column prop="address" label="操作" width="280">
+                                    <template slot-scope="scope" class="active">
+                                            <el-button type="text" size="small" style="color: blue"
+                                                    icon="el-icon-download" @click="downLoad(scope.row)" v-if="scope.row.status ==='已经上传'">下载</el-button>
+                                            <el-button type="text" size="small" style="color: blue"
+                                                    icon="el-icon-delete" @click="deleteFile(scope.$index)">删除</el-button>
+                                            <el-button type="text" size="small" style="color: blue"
+                                                    @click="setType(scope.$index)"  v-if="radio==scope.row.fileName" >设置执行类型</el-button>
+                                            <el-button type="text" size="small" style="color: blue" v-if="radio==scope.row.fileName">手动启动</el-button>
+                                    </template>
+                            </el-table-column>
+                    </el-table>
+            </el-form-item>
+            <el-form-item label="">
+                    <el-button style="margin-right:100px;color: #fff;background: #409EFF" type="primary" icon="el-icon-document"
+                            @click="submitBusiness" size="small" plain>保存</el-button>
+                    <!-- <el-button type="danger" v-show="isShowCancel" icon="el-icon-circle-close-outline"
+                            size="small" @click="cancel">取消</el-button> -->
+                    <el-button style="background: #f56c6c;color: #fff" plain type="danger" v-show="isShowDelete" icon="el-icon-delete" size="small" @click="delBusiness">删除</el-button>
+            </el-form-item>
+    </el-form>
+      <!-- 业务特征属性表 -->
+      <el-form ref="form" :model="businessFeatureAttrForm" label-width="100px" v-show="businessFeatureAttrFormShow">
+        <el-form-item label="流水号" style="display: none">
+                <el-input v-model="businessFeatureAttrForm.lsh"></el-input>
+        </el-form-item>
+        <el-form-item label="所属编码" style="margin-top:10px;display: none">
+                <el-input v-model="businessFeatureAttrForm.ssbm" :disabled="true"></el-input>
+        </el-form-item>
+        <el-form-item label="业务名称" style="margin-top:10px">
+                <el-input v-model="businessFeatureAttrForm.ywmc" :disabled="true"></el-input>
+        </el-form-item>
+        <el-form-item label="属性名称">
+                <el-input v-model="businessFeatureAttrForm.sxmc"></el-input>
+        </el-form-item>
+        <el-form-item label="属性编码">
+                <el-input v-model="businessFeatureAttrForm.sxbm" :disabled="true"></el-input>
+        </el-form-item>
+        <div style="display:flex">
+                <el-form-item label="属性数据类型" style="width: 45%">
+                        <el-select v-model="businessFeatureAttrForm.sxsjlx" placeholder="请选择"
+                                style="width: 100%">
+                                <el-option v-for="item in sjlxOptions" :key="item.value" :label="item.label"
+                                        :value="item.label">
+                                </el-option>
+                        </el-select>
+                </el-form-item>
+                <el-form-item label="风险等级" style="width: 45%">
+                        <el-select v-model="businessFeatureAttrForm.fxdj" placeholder="请选择"
+                                style="width: 100%">
+                                <el-option v-for="item in fxdjOptions" :key="item.value" :label="item.label"
+                                        :value="item.label">
+                                </el-option>
+                        </el-select>
+                </el-form-item>
+        </div>
+
+        <el-form-item label="属性值">
+                <el-input v-model="businessFeatureAttrForm.sxz"></el-input>
+        </el-form-item>
+
+        </el-form-item>
+        <el-form-item label="创建人">
+                <el-input v-model="businessFeatureAttrForm.cjr" :disabled="true"></el-input>
+        </el-form-item>
+        </el-form-item>
+        <el-form-item label="创建时间">
+                <el-input v-model="businessFeatureAttrForm.cjsj" :disabled="true"></el-input>
+        </el-form-item>
+
+        <el-form-item label="">
+                <el-button style="margin-right:100px;background: #409EFF;color: #fff" type="primary" icon="el-icon-document"
+                        size="small" @click="bisinessFeatrueSubmit" plain>保存</el-button>
+                <!-- <el-button type="danger" v-show="isShowCancel" icon="el-icon-circle-close-outline"
+                        size="small" @click="cancel">取消</el-button> -->
+                <el-button style="background: #f56c6c;color: #fff" plain type="danger" v-show="isShowDelete" icon="el-icon-delete" size="small" @click="delBusinessProp">删除</el-button>
+        </el-form-item>
+</el-form>
+  <!-- 业务类型环节  -->
+  <el-form ref="form" :model="businessTypeLinkForm" label-width="100px" v-show="businessTypeLinkFormShow">
+    <el-form-item style="display:none" label="流水号">
+            <el-input v-model="businessTypeLinkForm.lsh" :disabled="true"></el-input>
+    </el-form-item>
+    <el-form-item label="业务编码">
+            <el-input v-model="businessTypeLinkForm.ywbm" :disabled="true"></el-input>
+    </el-form-item>
+    <el-form-item label="环节编码">
+            <el-input v-model="businessTypeLinkForm.bm" :disabled="true"></el-input>
+    </el-form-item>
+    <el-form-item label="环节名称">
+            <el-input v-model="businessTypeLinkForm.mc" :disabled="false"></el-input>
+    </el-form-item>
+    <el-form-item label="是否必要">
+            <el-select v-model="businessTypeLinkForm.sfby" placeholder="请选择">
+                    <el-option v-for="item in sfbyOptions" :key="item.value" :label="item.label"
+                            :value="item.value">
+                    </el-option>
+            </el-select>
+    </el-form-item>
+    <el-form-item label="环节序号" :disabled="true">
+            <el-input v-model="businessTypeLinkForm.hjxh"></el-input>
+    </el-form-item>
+    </el-form-item>
+    <el-form-item label="前置环节编号">
+            <el-input v-model="businessTypeLinkForm.qzhjbh" :disabled="true"></el-input>
+    </el-form-item>
+    </el-form-item>
+    <el-form-item label="创建人" >
+            <el-input v-model="businessTypeLinkForm.cjr" :disabled="true"></el-input>
+    </el-form-item>
+    </el-form-item>
+    <el-form-item label="创建时间">
+            <el-input v-model="businessTypeLinkForm.cjsj" :disabled="true"></el-input>
+    </el-form-item>
+    <el-form-item label="">
+
+            <el-button style="position: relative" size="small" type="primary" icon="el-icon-upload2">上传处理文件
+                <form class="file"  id="pform" action="" style="width: 100%;height: 0px;" v-if="isShowForm1">
+                        <input style="height:31px;width: 100%;" type ="file" name="inputFile" id="inputFile" multiple="multiple" @change="uploadConfig"/>
+                        <input style="display:none;height: 0;" type="text" id="sslxbm" name='sslxbm' />
+                    </form>        </el-button>
+            <!-- <el-button size="small" type="primary" v-show="isShowTable" icon="el-icon-download"
+                    @click="download">下载已选择的文件</el-button> -->
+
+    </el-form-item>
+    <el-form-item label="" v-show="isShowTable" label-width="10">
+        <el-table size="small" ref="singleTable" :data="tableData3"
+        highlight-current-row @current-change="handleCurrentChange" @row-click="showRow"
+        style="width: 100%;color:#666" :row-style="tableRowStyle"
+        :header-cell-style="tableHeaderColor" :stripe="false" border
+        label-width="10">
+        <!-- <el-table-column type="selection" width="55">
+        </el-table-column> -->
+        <el-table-column prop="fileName" label="文件名称" width="190">
+                <!-- <template slot-scope="scope">{{ scope.row.date }}</template> -->
+        </el-table-column>
+        <!-- <el-table-column prop="lsh" label="流水号" width="190" style="display: none">             
+        </el-table-column>
+        <el-table-column prop="clwjbm" label="处理文件编码" width="190" style="display: none">             
+        </el-table-column> -->
+        <el-table-column prop="status" label="状态" width="180">
+                <template slot-scope="scope">
+                        <el-tag size="medium" :type="scope.row.status ==='已经上传'?'success':'danger'">{{
+                                scope.row.status }}</el-tag>
+                </template>
+        </el-table-column>
+        <el-table-column prop="start" label="是否启动" width="80">
+                <template scope="scope">
+                        <el-radio class="radio" v-model="radio" :label="scope.row.fileName"
+                                @change.native="getCurrentRow(scope.$index,scope.row)">&nbsp;</el-radio>
+                </template>
+
+        </el-table-column>
+        <el-table-column prop="address" label="操作" width="280">
+                <template slot-scope="scope" class="active">
+                        <el-button type="text" size="small" style="color: blue"
+                        icon="el-icon-download" @click="downLoad(scope.row)" v-if="scope.row.status ==='已经上传'">下载</el-button>
+                        <el-button type="text" size="small" style="color: blue"
+                                icon="el-icon-delete" @click="deleteFile(scope.$index)">删除</el-button>
+                        <el-button type="text" size="small" style="color: blue"
+                                @click="setType(scope.$index)" v-if="radio==scope.row.fileName">设置执行类型</el-button>
+                        <el-button type="text" size="small" style="color: blue" v-if="radio==scope.row.fileName">手动启动</el-button>
+
+
+                </template>
+        </el-table-column>
+</el-table>
+    </el-form-item>
+    <el-form-item label="">
+            <el-button style="margin-right:100px;background: #409EFF;color: #fff;" type="primary" icon="el-icon-document"
+                    @click="submitLink" size="small" plain>保存</el-button>
+            <!-- <el-button type="danger" v-show="isShowCancel" icon="el-icon-circle-close-outline"
+                    size="small" @click="cancel">取消</el-button> -->
+            <el-button style="background: #f56c6c;color: #fff" type="danger" v-show="isShowDelete" icon="el-icon-delete" size="small" @click="delLink">删除</el-button>
+    </el-form-item>
+</el-form>
+<!-- 环节属性表 -->
+<el-form ref="form" :model="businessTypeLinkAttrForm" label-width="100px" v-show="businessTypeLinkAttrFormShow">
+    <el-form-item style="display:none" label="流水号">
+            <el-input v-model="businessTypeLinkAttrForm.lsh"></el-input>
+    </el-form-item>
+
+    <el-form-item label="环节编码">
+            <el-input v-model="businessTypeLinkAttrForm.hjbm" :disabled="true"></el-input>
+    </el-form-item>
+    <el-form-item label="环节属性编码">
+            <el-input v-model="businessTypeLinkAttrForm.sxbm" :disabled="true"></el-input>
+    </el-form-item>
+    <el-form-item label="环节属性名称">
+            <el-input v-model="businessTypeLinkAttrForm.sxmc"></el-input>
+    </el-form-item>
+    <el-form-item label="环节属性类型">
+            <el-select v-model="businessTypeLinkAttrForm.sxsjlx" placeholder="请选择">
+                    <el-option v-for="item in sjlxOptions" :key="item.value" :label="item.label"
+                            :value="item.value">
+                    </el-option>
+            </el-select>
+            <!-- <el-input v-model="businessTypeLinkAttrForm.hjsxlx"></el-input> -->
+    </el-form-item>
+    </el-form-item>
+    <el-form-item label="环节属性值">
+            <el-input v-model="businessTypeLinkAttrForm.sxz"></el-input>
+    </el-form-item>
+    </el-form-item>
+    <el-form-item label="风险等级">
+            <el-select v-model="businessTypeLinkAttrForm.fxdj" placeholder="请选择">
+                    <el-option v-for="item in fxdjOptions" :key="item.value" :label="item.label"
+                            :value="item.value">
+                    </el-option>
+            </el-select>
+            <!-- <el-input v-model="businessTypeLinkAttrForm.fxdj"></el-input> -->
+    </el-form-item>
+    </el-form-item>
+    <el-form-item label="创建人">
+            <el-input v-model="businessTypeLinkAttrForm.cjr" :disabled="true"></el-input>
+    </el-form-item>
+    </el-form-item>
+    <el-form-item label="创建时间">
+            <el-input v-model="businessTypeLinkAttrForm.cjsj" :disabled="true"></el-input>
+    </el-form-item>
+    <el-form-item label="">
+            <el-button style="margin-right:100px;background: #409EFF;color: #fff;" type="primary" icon="el-icon-document" @click="linkPropSubmit" size="small" plain>保存</el-button>
+            <!-- <el-button type="danger" v-show="isShowCancel" icon="el-icon-circle-close-outline" size="small" @click="cancel">取消</el-button>
+             -->
+            <el-button style="background: #f56c6c;color: #fff" plain type="danger" v-show="isShowDelete" icon="el-icon-delete" size="small" @click="delLinkProp">删除</el-button>
+    </el-form-item>
+</el-form>
+   </div>  
+   <!-- 设置执行类型 -->
+   <el-dialog title="设置执行类型" :visible.sync="dialogFormVisible">
+    <el-form :model="form">
+
+            <el-form-item label="执行类型" :label-width="formLabelWidth">
+                    <el-select v-model="form.region" placeholder="" v-on:change="changeDoType">
+                            <el-option v-for="item in zxlxOptions" :key="item.value" :label="item.label"
+                                    :value="item.value">
+                            </el-option>
+                    </el-select>
+            </el-form-item>
+            <el-form-item label="时间策略" v-show="time" :label-width="formLabelWidth">
+                    <el-select v-model="timeForm.region" placeholder="" v-on:change="changeDoTime">
+                            <el-option v-for="item in regionOptions" :key="item.value" :label="item.label"
+                                    :value="item.value">
+                            </el-option>
+                    </el-select>
+                    <el-button type="danger">编辑时间策略</el-button>
+            </el-form-item>
+    </el-form>
+    <div slot="footer" class="dialog-footer">
+            <el-button @click="dialogFormVisible = false">取 消</el-button>
+            <el-button type="primary" @click="sjclSubmit">确 定</el-button>
+    </div>
+</el-dialog>
+	</div>
+	<script src="../lib/vue.js"></script>
+	<script src="../lib/element.js"></script>
+	<script src="../lib/axios.min.js"></script>
+    <script src="../dist/js/build/businessF.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Document</title>
+<link rel="stylesheet" href="../lib/element.min.css">
+<link rel="stylesheet" href="../dist/css/business.css">
+<script src="../lib/public.js"></script>
+</head>
+<style>
+body::-webkit-scrollbar {
+	display: none
+}
+
+#app::-webkit-scrollbar {
+	display: none
+}
+
+form::-webkit-scrollbar {
+	display: none
+}
+
+.up .el-input__inner {
+	background: #AADFFD;
+	border-color: #78C3F3;
+	color: #004974;
+}
+
+th .cell, tr {
+	text-align: center
+}
+
+.el-table--enable-row-hover .el-table__body tr:hover>td {
+	background-color: #ccc !important;
+}
+
+.el-form-item__content {
+	margin-left: 10px;
+}
+
+h4 {   
+	margin-bottom: 10px;
+}
+
+.file {
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	opacity: 0;
+}
+.el-tag + .el-tag {
+    margin-left: 10px;
+  }
+  .button-new-tag {
+    margin-left: 10px;
+    height: 32px;
+    line-height: 30px;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .input-new-tag {
+    width: 90px;
+    margin-left: 10px;
+    vertical-align: bottom;
+  }
+ .demo-table-expand {
+    font-size: 0;
+  }
+  .demo-table-expand label {
+    width: 120px;
+    color: #99a9bf;
+  }
+  .demo-table-expand .el-form-item {
+    margin-right: 0;
+    margin-bottom: 0;
+    width: 33%;
+  }
+</style>
+
+<body>
+	<div id="app">
+		<div class="addBtn">
+			<el-button style="background: #f56c6c;color: #fff" type="danger"
+				icon="el-icon-plus" size="small" plain @click="exec('newYwxx')"v-show="false">新增业务</el-button>
+		</div>
+		<h4 style='line-height: 20px; margin: 0px 0 10px 0; width: 100%; position: fixed'>
+			<span style="display: inline-block; width: 6px; height: 16px; background: #ee303d;">&nbsp;</span>
+			&nbsp; 业务特征
+		</h4>
+		<div class="left">
+        <el-tree :data="allYwdx" :props="defaultProps" @node-click="handleNodeClick" ></el-tree>
+		</div>
+   <div class="right">
+     <el-form :model="ywxx" label-width="120px" v-show="obj=='ywxx'">
+            <el-form-item style="display:none">
+                    <el-input v-model="ywxx.lsh"></el-input>
+                    <el-input v-model="ywxx.bm"></el-input>
+                    <el-input v-model="ywxx.jllx"></el-input>
+            </el-form-item>
+            <el-form-item label="所属系统">
+                <template>
+                  <el-select v-model="ywxx.sjydm" :disabled="true" placeholder="请选择">
+                    <el-option
+                      v-for="item in tmpValues.sysSjy"
+                      :key="item.sjydm"
+                      :label="item.sjymc"
+                      :value="item.sjydm">
+                    </el-option>
+                  </el-select>
+                </template>
+            </el-form-item>
+            <el-form-item label="业务名称">
+                    <el-input v-model="ywxx.mc"  @change="exec('changeObj',ywxx)"></el-input>
+            </el-form-item>
+            <el-form-item label="创建人" v-show="viewCtr.showCjxx">
+                    <el-input v-model="ywxx.cjr" :disabled="true"></el-input>
+            </el-form-item>
+            <el-form-item label="创建时间" v-show="viewCtr.showCjxx">
+                    <el-input v-model="ywxx.cjsj" :disabled="true"></el-input>
+            </el-form-item>
+            <el-form-item label="业务环节数" v-show="viewCtr.showSyhjs">
+                 <template>
+                  <el-input-number v-model="tmpValues.hjs" :min="0" :max="20" label="业务环节数" @change="changeHjs"></el-input-number>
+                </template>
+            </el-form-item>
+        </el-form>
+
+        <el-form :model="hjxx" label-width="120px" v-show="obj=='hjxx'">
+            <el-form-item style="display:none">
+                    <el-input v-model="hjxx.lsh"></el-input>
+                    <el-input v-model="hjxx.bm"></el-input>
+                    <el-input v-model="hjxx.sjbm"></el-input>
+            </el-form-item>
+            <el-form-item label="所属业务">
+                <template>
+                  <el-select v-model="hjxx.ywbm" :disabled="true" placeholder="请选择">
+                    <el-option
+                      v-for="item in tmpValues.sysYws"
+                      :key="item.bm"
+                      :label="item.mc"
+                      :value="item.bm">
+                    </el-option>
+                  </el-select>
+                </template>
+            </el-form-item>
+            <el-form-item label="环节名称">
+                    <el-input v-model="hjxx.mc" @change="exec('changeObj',hjxx)"></el-input>
+            </el-form-item>
+            <el-form-item label="是否必要">
+                <el-tooltip :content="hjxx.sfby=='1'?'必要环节':'非必要环节'" @change="exec('changeObj',hjxx)" placement="top">
+                 <el-switch 
+                    v-model="hjxx.sfby"
+                    active-value="1"
+                    inactive-value="0">
+                </el-switch>
+              </el-tooltip>
+            </el-form-item>
+            <el-form-item label="环节序号">
+                <template>
+                  <el-input-number v-model="hjxx.hjxh" @change="exec('changeObj',hjxx)" :min="1" :max="100" label="环节序号"></el-input-number>
+                </template>
+            </el-form-item>
+            <el-form-item label="创建人" v-show="!isEmpty(hjxx.cjr)">
+                    <el-input v-model="hjxx.cjr" :disabled="true"></el-input>
+            </el-form-item>
+            <el-form-item label="创建时间" v-show="!isEmpty(hjxx.cjsj)">
+                    <el-input v-model="hjxx.cjsj" :disabled="true"></el-input>
+            </el-form-item>
+           
+        </el-form>
+        <el-form>
+            <el-form-item label="" v-show="!isEmpty(viewCtr.ywsxPaneName)">
+            <template>
+             <el-tabs tab-position="left" style="height: 500px;">
+                <el-tab-pane :label="viewCtr.ywhjPaneName">
+                    <el-tag >开始</el-tag>
+                    <i class="el-icon-arrow-right" style="cursor:hand" v-for="ywhj in ywhjs" @click="exec('showYwhj',ywhj)">
+                      <el-tag closable :disable-transitions="false" @close="exec('deleteYwhj',ywhj)" >
+                        {{ywhj.mc}}
+                        </el-tag>
+                    </i>
+                    <el-button class="button-new-tag" size="small" @click="exec('newYwhj')">+ 环节</el-button>
+                    <el-form :model="ywhj" label-width="100px" v-show="viewCtr.showYwhjForm">
+
+                    <el-form-item style="display:none" label="流水号">
+                        <el-input v-model="ywhj.lsh" :disabled="true"></el-input>
+                        <el-input v-model="ywhj.ywbm" :disabled="true"></el-input>
+                        <el-input v-model="ywhj.bm" :disabled="true"></el-input>
+                        <el-input v-model="ywhj.sjbm" :disabled="true"></el-input>
+                    </el-form-item>
+
+                    <el-form-item label="环节名称">
+                            <el-input v-model="ywhj.mc" @change="exec('changeYwhj',ywhj)"></el-input>
+                    </el-form-item>
+                    <el-form-item label="是否必要">
+                        <el-tooltip :content="ywhj.sfby=='1'?'必要环节':'非必要环节'" placement="top">
+                         <el-switch @change="exec('changeYwhj',ywhj)"
+                            v-model="ywhj.sfby"
+                            active-value="1"
+                            inactive-value="0">
+                        </el-switch>
+                      </el-tooltip>
+                    </el-form-item>
+                    <el-form-item label="环节序号" :disabled="true">
+                        <template>
+                          <el-input-number @change="exec('changeYwhj',ywhj)" v-model="ywhj.hjxh" :min="1" :max="100" label="环节序号"></el-input-number>
+                        </template>
+                    </el-form-item>
+                </el-form>
+                </el-tab-pane>
+                <el-tab-pane :label="viewCtr.ywsxPaneName">
+                   <el-button style="background: #f56c6c;color: #fff" plain type="danger" icon="el-icon-plus" size="small" @click="exec('newYwsx')" :disabled="viewCtr.newYwsx_dis">新增{{viewCtr.ywsxPaneName}}</el-button> 
+                   <template>
+                      <el-table :data="ywsxs" height="470px" border style="width: 100%">
+                        <el-table-column type="expand">
+                          <template slot-scope="props">
+                            <el-form label-position="left" inline class="demo-table-expand">
+                              <el-form-item style="display:none" label="流水号">
+                                <el-input v-model="props.row.lsh"></el-input>
+                                <el-input v-model="props.row.sslx"></el-input>
+                                <el-input v-model="props.row.ssbm"></el-input>
+                                <el-input v-model="props.row.sxbm"></el-input>
+                             </el-form-item>
+                              <el-form-item label="特征数据类型">
+                                <el-select v-model="props.row.sxsjlx" placeholder="请选择"><el-option v-for="item in tmpValues.sysSjlx" :key="item.zdm" :label="item.zmc" :value="item.zdm">
+                                 </el-option>
+                                </el-select>
+                              </el-form-item>                              
+                              <el-form-item label="特征名称">
+                                <el-input v-model="props.row.sxmc"></el-input>
+                              </el-form-item>
+                              <el-form-item label="特征值">
+                                <el-input v-model="props.row.sxz"></el-input>
+                              </el-form-item>
+                              <el-form-item label="风险等级">
+                                <el-select v-model="props.row.fxdj" placeholder="请选择">
+                                    <el-option v-for="item in tmpValues.sysFxdj" :key="item.zdm" :label="item.zmc" :value="item.zdm">
+                                 </el-option>
+                                </el-select>
+                              </el-form-item>
+                               <el-form-item label="创建人">
+                                <el-input v-model="props.row.cjr" :disabled="true"></el-input>
+                            </el-form-item>
+                            <el-form-item label="创建时间">
+                                <el-input v-model="props.row.cjsj" :disabled="true"></el-input>
+                            </el-form-item>
+                            </el-form>
+                          </template>
+                        </el-table-column>
+                        <el-table-column label="属性名称" prop="sxmc">
+                        </el-table-column>
+                        <el-table-column label="属性值" prop="sxz">
+                        </el-table-column>
+                        <el-table-column label="风险等级" prop="fxdj">
+                        </el-table-column>
+                         <el-table-column label="操作" width="140" >
+                            <template slot-scope="scope" >
+                               <el-button type="text" size="small" style="color:#409EFF;" @click="exec('deleteYwsx',scope.row)" >删除</el-button>
+                            </template>
+                        </el-table-column>
+                      </el-table>
+                    </template>
+                </el-tab-pane>
+                <el-tab-pane :label="viewCtr.clwjPaneName">
+                   <el-form label-position="left">
+                    <el-form-item label="">
+                        <el-button style="position: relative;" size="small" type="primary" icon="el-icon-upload">上传处理文件
+                          <form class="file" id="pform" action="" style="width: 100%;height: 100%;">
+                              <input style="height:31px;width: 100%;" type ="file" name="inputFile" id="inputFile" multiple="multiple" @change="exec('changeUploadFile')"/>
+                              <input style="display:none;height: 0;" type="text" id="sslxbm" name='sslxbm' />
+                              <input style="display:none;height: 0;" type="text" id="lx" name='lx' />
+                          </form>                          
+                        </el-button>
+                    </el-form-item>
+                    <el-form-item label="">
+                      <el-radio-group v-model="tmpValues.qdwjmc" style="width: 100%;">
+                      <el-table size="small" :data="ywclwjs"
+                          style="width: 100%;color:#666"
+                          :stripe="false" border>
+                        <el-table-column prop="bqwj" label="文件名称" style="width: 40%;">
+                        </el-table-column>
+                        <el-table-column prop="" label="是否上传"  style="width: 15%;">
+                          <template slot-scope="scope">
+                            <el-tag size="medium" :type="isEmpty(scope.row.clwjbm)?'danger':'success'">{{isEmpty(scope.row.clwjbm)?'未上传':'已上传' }}</el-tag>
+                          </template>
+                        </el-table-column>
+                        <el-table-column prop="" label="是否启动文件" style="width: 15%;">
+                          <template scope="scope">
+                            <el-radio :label="scope.row.bqwj"><i class="el-icon-caret-right"></i></el-radio>
+                          </template>
+                        </el-table-column>
+                        <el-table-column prop="" label="操作" style="width: 30%;">
+                          <template slot-scope="scope">
+                            <el-button type="text" size="small" style="color: blue"
+                              icon="el-icon-download" @click="exec('downLoadFile',scope.row)" v-if="!isEmpty(scope.row.clwjbm)">下载</el-button>
+                            <el-button type="text" size="small" style="color: blue"
+                              icon="el-icon-delete" @click="exec('deleteFile',scope.row)">删除</el-button>
+                          </template>
+                        </el-table-column>
+                      </el-table>
+                  </el-radio-group>
+                    </el-form-item>
+                    <el-form-item v-show="!isEmpty(tmpValues.qdwjmc)" label="是否提交后立即执行" style="margin:10px;">
+                      <el-tooltip :content="tmpValues.sfljzx=='1'?'执行':'不执行'" placement="top">
+                        <el-switch v-model="tmpValues.sfljzx" active-value="1" inactive-value="0">
+                        </el-switch>
+                      </el-tooltip>
+                    </el-form-item>
+                    <el-form-item v-show="!isEmpty(tmpValues.qdwjmc)" label="执行类型" style="margin:10px;" >
+                      <el-tooltip :content="tmpValues.clwjzxlx=='1'?'定时':'手动'" placement="top">
+                        <el-switch v-model="tmpValues.clwjzxlx" active-value="1" inactive-value="2">
+                        </el-switch>
+                      </el-tooltip>
+                    </el-form-item>
+                    <el-form-item label="时间策略" v-show="tmpValues.clwjzxlx=='1'" >
+                        <el-select v-model="zxcls"  multiple placeholder="请选择" >
+                                <el-option v-for="item in tmpValues.sysSjcl" :label="item.clmc" :value="item.clbh">
+                                </el-option>
+                        </el-select>
+                    </el-form-item>                   
+                  </el-form>
+                </el-tab-pane>
+            </el-tabs>
+            </template>
+    </el-form-item>
+    <el-form-item label="">
+        <el-button style="margin-right:100px;color: #fff;background: #409EFF" type="primary" icon="el-icon-document" v-show="!isEmpty(ywxx.mc)||!isEmpty(hjxx.mc)"  @click="exec('saveCheck')" size="small" plain>保存</el-button>
+        <el-button style="background: #f56c6c;color: #fff" plain type="danger" icon="el-icon-delete" size="small" v-show="!isEmpty(ywxx.bm)||!isEmpty(hjxx.bm)" @click="exec('delete')" >删除</el-button>
+    </el-form-item> 
+    </el-form>
+
+	</div>
+</div>
+	<script src="../lib/vue.js"></script>
+	<script src="../lib/element.js"></script>
+	<script src="../lib/axios.min.js"></script>
+    <script src="../lib/lodash.min.js"></script>
+    <script src="../dist/js/build/ywtz.js"></script>
+
+</body>
+
+</html>

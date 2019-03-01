@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数据源管理</title>
+    <!-- <link rel="stylesheet" href="../lib/element.css"> -->
+    <!-- <link rel="stylesheet" href="https://unpkg.com/element-ui@1.4/lib/theme-default/index.css"> -->
+    <link rel="stylesheet" href="../lib/element.min.css">
+    <link rel="stylesheet" href="../dist/css/datasrc.css">  
+    <link rel="stylesheet" href="../dist/css/business.css">
+    <script src="../lib/public.js"></script>
+<style> .el-menu-vertical-demo:not(.el-menu--collapse) {
+    background-color: rgb(51, 58, 66);
+  }
+
+  .el-row {
+    outline:0;
+  }
+  .el-col {
+    border-radius: 4px;
+  }
+  .grid-content {
+    border-radius: 4px;
+    min-height: 36px;
+	font-size: 24px;
+	color: #1a1a1a;
+	font-weight: 600;
+	white-space: nowrap;
+	overflow: hidden;
+  }
+ .el-menu .el-menu-item{height:40px;line-height:40px;}
+ .el-menu-item{height:40px;line-height:40px;padding:0px;}
+ .el-menu-item [class^=el-icon-]{font-size:20px;}
+
+</style>
+</head>
+<body>
+    <div id="app">
+    <div class="addBtn">
+			<el-button style="background: #f56c6c;color: #fff" type="danger"
+				icon="el-icon-plus" size="small" plain @click="initDataSrc">新增数据源</el-button>
+		</div>
+        <h4 style='line-height: 20px; margin: 0px 0 10px 0; width: 100%; position: fixed'>
+            <span style="display: inline-block; width: 6px; height: 16px; background: #ee303d;">&nbsp;</span>
+            &nbsp; 数据源管理
+          </h4>
+              <div class="left">
+                <el-menu  class="el-menu-vertical-demo" @select="handleOpen" background-color="#fff" text-color="#333" active-text-color="#ee303d">
+                  <el-menu-item v-for="item in sjys" :index="item.sjydm" >
+                  <i class="el-icon-menu"></i>
+                  <span slot="title">{{item.sjymc}}</span>
+                  </el-menu-item>
+                </el-menu>
+              </div>
+              <div class="right">
+                <el-form ref="form" :model="sjyxx" label-position="right" label-width="160px" size="medium">
+                	<el-form-item label="数据源类型">
+                      <el-select v-model="sjyxx.sjylx" @change="changeSjylx" placeholder="请选择">
+                        <el-option v-for="item in sjylx" :label="item.zmc" :value="item.zdm"></el-option>
+                      </el-select>
+                    </el-form-item>
+                    <el-form-item label="数据源名称">
+                      <el-input v-model="sjyxx.sjymc"></el-input>
+                    </el-form-item>
+                    <el-form-item label="数据源编码">
+                      <el-input v-model="sjyxx.sjydm" :disabled="true"></el-input>
+                    </el-form-item>
+                    							  
+                    <el-form-item v-for="item in sjyxx.sjycsz" :label="item.csmc">
+                      <el-input style="display:none;" v-model="item.csdm"></el-input>
+                      <el-input v-model="item.csz" clearable></el-input>
+                    </el-form-item>
+                      <el-form-item label="">
+                    <el-button style="margin-right:100px;color: #fff;background: #409EFF" type="primary" icon="el-icon-document"
+                            @click="exec('save')" size="small" plain v-show="isShowSave" >保存</el-button>
+                    <el-button style="margin-right:100px;color: #fff;background: #409EFF" type="primary" icon="el-icon-share"
+                            @click="exec('testConn')" size="small" plain v-show="isShowSave" >测试连接</el-button>
+                    <el-button style="background: #f56c6c;color: #fff" plain type="danger" v-show="isShowDelete" icon="el-icon-delete" size="small" @click="exec('delete')" >删除</el-button>
+              </el-form-item>
+              </el-form>	   
+              </div>     
+    </div>  
+    <script src="../lib/vue.js"></script>
+    <script src="../lib/element.js"></script>
+    <script src="../lib/axios.min.js"></script>
+    <script src="../dist/js/build/datasrc.js"></script>
+    <!-- <script src="lib/require.min.js" defer async="true" data-main="main"></script> -->
+</body>
+</html>

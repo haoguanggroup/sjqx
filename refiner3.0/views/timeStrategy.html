@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../lib/element.min.css">
+    <link rel="stylesheet" href="../dist/css/timeStrategy.css">  
+    <script src="../lib/public.js"></script>
+</head>
+<style>
+       
+            /* body::-webkit-scrollbar {display:none} 
+            #app::-webkit-scrollbar {display:none}
+            .left::-webkit-scrollbar {display:none}  
+            .right::-webkit-scrollbar {display:none} */
+            form::-webkit-scrollbar {display:none}
+            .up .el-input__inner{
+                    background: #AADFFD;
+                    border-color: #78C3F3;
+                    color: #004974;
+                   
+            }
+            .el-table th,.el-table th>.cell{
+                color: #666;
+                background: #e4e8f2;
+                    line-height: 30px;                   
+            }
+            .el-form-item__content{
+            margin-left: 10px;
+            }
+           h4{
+            margin-bottom: 10px;
+           }
+           .el-dialog__body {
+            padding: 30px 20px;
+            color: #606266;
+            font-size: 14px;
+          }
+
+           .sm{
+            margin-bottom: 10px;
+            border-bottom:1px solid #F0F0F0;
+            border-bottom-width: 2px;
+           }
+           .el-dialog{
+            position: relative;
+           }
+            </style>
+
+<body>
+  <div id="app">
+    <div style="display: flex;  overflow: auto;">
+      <h4 style='line-height: 20px;margin:10px 0 10px 0;width: 100%;'> 
+      <span style="display:inline-block;width:6px;height:16px;background: #ee303d;">&nbsp;</span>  &nbsp; 时间策略</h4>          
+      <el-button size="small" type="danger el-button--100" @click="dialogFormVisibleAdd = true" icon="el-icon-plus">新增时间策略</el-button> 
+    </div>
+    <el-table :data="tableData" border style="width: 100%">
+      <el-table-column prop="clbh" label="时间策略编号" :show-overflow-tooltip="true"></el-table-column>
+      <el-table-column prop="clmc" label="时间策略名称" :show-overflow-tooltip="true"></el-table-column>
+      <el-table-column prop="kssj" label="开始时间" width="180"></el-table-column>
+      <el-table-column prop="task" label="任务" :show-overflow-tooltip="true"></el-table-column>
+      <el-table-column prop="status" label="状态">
+        <template slot-scope="scope">
+            <el-tag v-if="scope.row.status=='0'" type="primary" size="small" >未执行</el-tag>
+            <el-tag v-if="scope.row.status=='1'" type="primary" size="small" >执行中</el-tag>
+        </template>
+      </el-table-column>
+      <el-table-column prop="cjr" label="创建人"> </el-table-column>
+      <el-table-column prop="cjsj" label="创建时间"  width="180"> </el-table-column>
+      <el-table-column prop="name" label="操作" width="200" >
+        <template slot-scope="scope">
+          <el-button type="text" size="small" style="color:#409EFF;" @click="findSjcl(scope.row.clbh)">查看详情</el-button>      
+          <!-- 详情弹窗 -->
+          <el-dialog title="时间策略详情" :visible.sync="dialogFormVisibleFind" :close-on-click-modal="false">
+            <el-form :model="FindSjcl">											
+                <el-form-item label="时间策略编号" :label-width="formLabelWidth" >
+                    <el-input v-model="FindSjcl.clbh" autocomplete="off" prop="EditJdmbDatacsmc" :disabled="true"></el-input>
+                </el-form-item>
+                <el-form-item label="时间策略名称" :label-width="formLabelWidth" >
+                    <el-input v-model="FindSjcl.clmc" autocomplete="off" prop="EditJdmbDatacsmc" :disabled="true"></el-input>
+                </el-form-item> 
+                <div style="display: flex">
+                  <el-form-item label="任务" :label-width="formLabelWidth" >
+                      <el-input v-model="FindSjcl.task" autocomplete="off" prop="EditJdmbDatacsmc" :disabled="true"></el-input>
+                  </el-form-item>
+                  <el-form-item label="任务参数" :label-width="formLabelWidth" >
+                      <el-input v-model="FindSjcl.parameter" autocomplete="off" prop="EditJdmbDatacsmc":disabled="true"></el-input>
+                  </el-form-item> 
+                </div>
+                <div style="display: flex">
+                  <el-form-item label="状态" :label-width="formLabelWidth" >
+                    <el-select v-model="FindSjcl.status" placeholder="请选择" size="small" :disabled="true">
+                      <el-option
+                        v-for="item in statusOptions"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </el-form-item> 
+                  <el-form-item label="是否工作日" :label-width="formLabelWidth" >
+                    <el-select v-model="FindSjcl.isworkday" placeholder="请选择" size="small" :disabled="true">
+                      <el-option
+                        v-for="item in isworkdayOptions"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </el-form-item> 
+                </div>
+                <el-form-item label="开始时间" :label-width="formLabelWidth">
+                  <el-input v-model="FindSjcl.kssj" autocomplete="off" disabled="true"></el-input>
+                </el-form-item>
+                <div style="display: flex">
+                  <el-form-item label="秒" style='width:20%' :label-width="formLabelWidth">
+                      <el-input v-model="FindSjcl.seconds" autocomplete="off" style='width:70px' disabled="true"></el-input>
+                  </el-form-item>
+                  <el-form-item label="分" style='width:20%' :label-width="formLabelWidth">
+                      <el-input v-model="FindSjcl.minute" autocomplete="off"  style='width:70px' disabled="true"></el-input>
+                  </el-form-item>
+                  <el-form-item label="时" style='width:20%' :label-width="formLabelWidth">
+                      <el-input v-model="FindSjcl.hour" autocomplete="off" style='width:70px'disabled="true"></el-input>
+                  </el-form-item>
+                </div>
+                <div style="display: flex">
+                  <el-form-item label="日"   style='width:20%' :label-width="formLabelWidth">
+                    <el-input v-model="FindSjcl.day" autocomplete="off" style='width:70px' disabled="true"></el-input>
+                  </el-form-item>
+                  <el-form-item label="月"  style='width:20%' :label-width="formLabelWidth">
+                    <el-input v-model="FindSjcl.month" autocomplete="off" style='width:70px' disabled="true"></el-input>
+                  </el-form-item>    
+                  <el-form-item label="周"  style='width:20%' :label-width="formLabelWidth">
+                      <el-input v-model="FindSjcl.week" autocomplete="off" style='width:70px' disabled="true"></el-input>
+                  </el-form-item>
+                  <el-form-item label="年" style='width:20%' :label-width="formLabelWidth">
+                      <el-input v-model="FindSjcl.year" autocomplete="off" style='width:70px' disabled="true"></el-input>
+                  </el-form-item>
+                </div>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+              <el-button type="primary" @click="dialogFormVisibleFind = false" >确 定</el-button>
+            </div>
+          </el-dialog>	
+          <!-- 新增弹窗 -->
+          <el-dialog title="新增时间策略" :visible.sync="dialogFormVisibleAdd" @close="addCancel('AddSjcl')" :close-on-click-modal="false">
+            
+              <el-button plain @click="dialogFormVisibleInstruction = true" style="position: absolute;right:60px;top:10px">填写说明</el-button>
+       
+            <el-form :model="AddSjcl" :rules="rules" ref="AddSjcl">											
+                <el-form-item label="时间策略名称" :label-width="formLabelWidth" prop="clmc">
+                    <el-input v-model="AddSjcl.clmc" autocomplete="off" ></el-input>
+                </el-form-item> 
+                <div style="display: flex">
+                  <el-form-item label="任务" :label-width="formLabelWidth" prop="task">
+                      <el-input v-model="AddSjcl.task" autocomplete="off" ></el-input>
+                  </el-form-item>
+                  <el-form-item label="任务参数" :label-width="formLabelWidth" prop="parameter">
+                      <el-input v-model="AddSjcl.parameter" autocomplete="off" ></el-input>
+                  </el-form-item> 
+                </div>
+                <div style="display: flex">
+                  <el-form-item label="状态" :label-width="formLabelWidth" prop="status">
+                    <el-select v-model="AddSjcl.status" placeholder="请选择" size="small">
+                      <el-option
+                        v-for="item in statusOptions"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </el-form-item> 
+                  <el-form-item label="是否工作日" :label-width="formLabelWidth" prop="isworkday">
+                    <el-select v-model="AddSjcl.isworkday" placeholder="请选择" size="small">
+                      <el-option
+                        v-for="item in isworkdayOptions"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value">
+                      </el-option>
+                    </el-select>
+                  </el-form-item> 
+                </div>
+                <el-form-item label="开始时间" :label-width="formLabelWidth" prop="kssj">
+                    <div class="block">
+                      <el-date-picker
+                        v-model="AddSjcl.kssj"
+                        type="datetime"
+                        placeholder="请选择开始时间">
+                      </el-date-picker>
+                    </div>
+                </el-form-item>    
+                <div style="display: flex">
+                  <el-form-item label="秒" style='width:20%' :label-width="formLabelWidth" prop="seconds">
+                      <el-input v-model="AddSjcl.seconds" autocomplete="off" style='width:70px'></el-input>
+                  </el-form-item>
+                  <el-form-item label="分" style='width:20%' :label-width="formLabelWidth" prop="minute">
+                      <el-input v-model="AddSjcl.minute" autocomplete="off"  style='width:70px'></el-input>
+                  </el-form-item>
+                  <el-form-item label="时" style='width:20%' :label-width="formLabelWidth" prop="hour">
+                      <el-input v-model="AddSjcl.hour" autocomplete="off" style='width:70px'></el-input>
+                  </el-form-item>
+                </div>
+                <div style="display: flex">
+                  <el-form-item label="日"   style='width:20%' :label-width="formLabelWidth" prop="day"> 
+                    <el-input v-model="AddSjcl.day" autocomplete="off" style='width:70px'></el-input>
+                  </el-form-item>
+                  <el-form-item label="月"  style='width:20%' :label-width="formLabelWidth" prop="month"> 
+                    <el-input v-model="AddSjcl.month" autocomplete="off" style='width:70px'></el-input>
+                  </el-form-item>    
+                  <el-form-item label="周"  style='width:20%' :label-width="formLabelWidth" prop="week">
+                      <el-input v-model="AddSjcl.week" autocomplete="off" style='width:70px'></el-input>
+                  </el-form-item>
+                  <el-form-item label="年" style='width:20%' :label-width="formLabelWidth" prop="year">
+                      <el-input v-model="AddSjcl.year" autocomplete="off" style='width:70px'></el-input>
+                  </el-form-item>
+                </div>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="dialogFormVisibleAdd = false">取 消</el-button>
+                <el-button type="primary"  @click.native="addSjcl" >确 定</el-button>
+            </div>
+          </el-dialog> 			
+          <el-button type="text" size="small" style="color:#409EFF;" @click="findAndEditSjcl(scope.row.clbh)">编辑</el-button>
+          <!-- 编辑弹窗 -->
+          <el-dialog title="编辑时间策略" :visible.sync="dialogFormVisibleEdit" :close-on-click-modal="false">
+              <el-form :model="EditSjcl">											
+                  <el-form-item label="时间策略编号" :label-width="formLabelWidth" >
+                      <el-input v-model="EditSjcl.clbh" autocomplete="off" prop="EditJdmbDatacsmc"  :disabled="true"></el-input>
+                  </el-form-item>
+                  <el-form-item label="时间策略名称" :label-width="formLabelWidth" >
+                      <el-input v-model="EditSjcl.clmc" autocomplete="off" prop="EditJdmbDatacsmc"></el-input>
+                  </el-form-item> 
+                  <div style="display: flex">
+                    <el-form-item label="任务" :label-width="formLabelWidth" >
+                        <el-input v-model="EditSjcl.task" autocomplete="off" prop="EditJdmbDatacsmc"></el-input>
+                    </el-form-item>
+                    <el-form-item label="任务参数" :label-width="formLabelWidth" >
+                        <el-input v-model="EditSjcl.parameter" autocomplete="off" prop="EditJdmbDatacsmc"></el-input>
+                    </el-form-item> 
+                  </div>
+                  <div style="display: flex">
+                    <el-form-item label="状态" :label-width="formLabelWidth" >
+                      <el-select v-model="EditSjcl.status" placeholder="请选择" size="small">
+                        <el-option
+                          v-for="item in statusOptions"
+                          :key="item.value"
+                          :label="item.label"
+                          :value="item.value">
+                        </el-option>
+                      </el-select>
+                    </el-form-item> 
+                    <el-form-item label="是否工作日" :label-width="formLabelWidth" >
+                      <el-select v-model="EditSjcl.isworkday" placeholder="请选择" size="small">
+                        <el-option
+                          v-for="item in isworkdayOptions"
+                          :key="item.value"
+                          :label="item.label"
+                          :value="item.value">
+                        </el-option>
+                      </el-select>
+                    </el-form-item> 
+                  </div>
+                  <el-form-item label="开始时间" :label-width="formLabelWidth">
+                      <div class="block">
+                        <el-date-picker
+                          v-model="EditSjcl.kssj"
+                          type="datetime"
+                          placeholder="请选择开始时间">
+                        </el-date-picker>
+                      </div>
+                  </el-form-item>    
+                  <div style="display: flex">
+                    <el-form-item label="秒" style='width:20%' :label-width="formLabelWidth">
+                        <el-input v-model="EditSjcl.seconds" autocomplete="off" style='width:70px'></el-input>
+                    </el-form-item>
+                    <el-form-item label="分" style='width:20%' :label-width="formLabelWidth">
+                        <el-input v-model="EditSjcl.minute" autocomplete="off"  style='width:70px'></el-input>
+                    </el-form-item>
+                    <el-form-item label="时" style='width:20%' :label-width="formLabelWidth">
+                        <el-input v-model="EditSjcl.hour" autocomplete="off" style='width:70px'></el-input>
+                    </el-form-item>
+                  </div>
+                  <div style="display: flex">
+                    <el-form-item label="日"   style='width:20%' :label-width="formLabelWidth">
+                      <el-input v-model="EditSjcl.day" autocomplete="off" style='width:70px'></el-input>
+                    </el-form-item>
+                    <el-form-item label="月"  style='width:20%' :label-width="formLabelWidth">
+                      <el-input v-model="EditSjcl.month" autocomplete="off" style='width:70px'></el-input>
+                    </el-form-item>    
+                    <el-form-item label="周"  style='width:20%' :label-width="formLabelWidth">
+                        <el-input v-model="EditSjcl.week" autocomplete="off" style='width:70px'></el-input>
+                    </el-form-item>
+                    <el-form-item label="年" style='width:20%' :label-width="formLabelWidth">
+                        <el-input v-model="EditSjcl.year" autocomplete="off" style='width:70px'></el-input>
+                    </el-form-item>
+                  </div>
+
+              </el-form>
+              <div slot="footer" class="dialog-footer">
+                  <el-button @click="dialogFormVisibleEdit = false">取 消</el-button>
+                  <el-button type="primary"  @click.native="editSjcl" >确 定</el-button>
+              </div>
+          </el-dialog>								
+          <el-button type="text" size="small" style="color:#409EFF;" @click="deleteSjcl(scope.row.clbh)">删除</el-button>
+          <!-- 填写说明 -->
+          <el-dialog title="填写说明" :visible.sync="dialogFormVisibleInstruction" :close-on-click-modal="false" width="30%" height ="50%">
+            <div class="dialog__body"> 
+              <span>
+                <div class="sm"> 
+                  (1)*：表示匹配该域的任意值，假如在分钟域使用*, 即表示每分钟都会触发事件。
+                
+                </div>
+                <div class="sm">
+                  (2)?:匹配域的任意值。因为 日 和 星期 会相互影响。例如想在每月的20日触发调度，不管20日到底是星期几，则只能使用如下写法：日=20 ,星期=?。
+                </div>
+                <div class="sm">
+                  (3)-:表示范围，例如在 分钟 域使用5-20，表示从5分到20分钟每分钟触发一次
+                </div>
+                <div class="sm">
+                  (4)/：表示起始时间开始触发，然后每隔固定时间触发一次，例如在 分钟域 使用5/20,则意味从20分开始 每5分钟触发一次，而25，45等分别触发一次.
+                </div>
+                <div class="sm">
+                  (5),:表示列出枚举值值。例如：在 分钟域 使用5,20，则意味着在5和20分每分钟触发一次。例： 依次顺序为：{秒数} {分钟} {小时} {日期} {月份} {星期} */5 * * * * ? 每隔5秒执行一次 0 */1 * * * ? 每隔1分钟执行一次 0 0 5-15 * * ? 每天5-15点整点触发 0 0/3 * * * ? 每三分钟触发一次 0 0-5 14 * * ? 在每天下午2点到下午2:05期间的每1分钟触发? 0 0/5 14 * * ? 在每天下午2点到下午2:55期间的每5分钟触发 0 0/5 14,18 * * ? 在每天下午2点到2:55期间和下午6点到6:55期间的每5分钟触发</p>
+                </div>
+                </span>
+
+            </div>
+            
+            <div slot="footer" class="dialog-footer">
+              <el-button plain @click="dialogFormVisibleInstruction = false" >关闭</el-button>
+            </div>
+          </el-dialog>	
+        </template>
+      </el-table-column>
+    </el-table>
+    <div class="block">
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :page-sizes="Pager"
+        :page-size="1"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="total">
+      </el-pagination>
+    </div>
+  </div>
+
+  <script src="../lib/vue.js"></script>
+  <script src="../lib/element.js"></script>
+  <script src="../lib/axios.min.js"></script>
+  <script src="../dist/js/build/timeStrategy.js"></script>
+    
+</body>
+</html>

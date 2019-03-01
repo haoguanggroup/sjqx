@@ -1,0 +1,38 @@
+//resize.less 重置样式
+@import url(normalize.less);
+*{
+	padding: 0;
+	margin: 0;
+	
+	/*方便的盒子模型计算*/
+	box-sizing: border-box;
+	
+	/*在触摸屏，触摸一下可按下，点击元素的高亮颜色*/
+	-webkit-tap-highlight-color:transparent;
+}
+*:focus{
+	outline: none;
+}
+ul,li{
+	list-style: none;
+}
+html,body{
+	font-family: "微软雅黑";
+}
+
+.left{
+	float: left;
+}
+.right{
+	float: right;
+}
+.clearfix:after{
+	content: "";
+	display: block;
+	visibility: visible;
+	clear: both;
+}
+a{
+	text-decoration: none;
+	color: #000;
+}

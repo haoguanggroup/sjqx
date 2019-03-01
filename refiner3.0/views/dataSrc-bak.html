@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="../lib/element.css"> -->
+    <!-- <link rel="stylesheet" href="https://unpkg.com/element-ui@1.4/lib/theme-default/index.css"> -->
+    <link rel="stylesheet" href="../lib/element.min.css">
+    <link rel="stylesheet" href="../dist/css/datasrc.css">  
+    <script src="../lib/public.js"></script>
+<style> .el-menu-vertical-demo:not(.el-menu--collapse) {
+    background-color: rgb(51, 58, 66);
+  }
+
+  .el-row {
+    outline:0;
+  }
+  .el-col {
+    border-radius: 4px;
+  }
+  .grid-content {
+    border-radius: 4px;
+    min-height: 36px;
+	font-size: 24px;
+	color: #1a1a1a;
+	font-weight: 600;
+	white-space: nowrap;
+	overflow: hidden;
+  }
+ .el-menu .el-menu-item{height:40px;line-height:40px;}
+ .el-menu-item{height:40px;line-height:40px;padding:0px;}
+ .el-menu-item [class^=el-icon-]{font-size:20px;}
+
+</style>
+</head>
+<body>
+    <div id="app">
+        <h4 style='line-height: 20px; margin: 0px 0 10px 0; width: 100%; position: fixed'>
+            <span style="display: inline-block; width: 6px; height: 16px; background: #ee303d;">&nbsp;</span>
+            &nbsp; 业务系统定义
+          </h4>
+              <div class="left">
+                <el-menu default-active="1" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" background-color="#fff" text-color="#333" active-text-color="#ee303d">
+                  <el-menu-item index="1">
+                  <i class="el-icon-menu"></i>
+                  <span slot="title">业务系统一</span>
+                  </el-menu-item>
+                  <el-menu-item index="2">
+                  <i class="el-icon-menu"></i>
+                  <span slot="title">业务系统二</span>
+                  </el-menu-item>
+                  <el-menu-item index="3">
+                  <i class="el-icon-menu"></i>
+                  <span slot="title">业务系统三</span>
+                  </el-menu-item>
+                  <el-menu-item index="4">
+                  <i class="el-icon-menu"></i>
+                  <span slot="title">业务系统四</span>
+                  </el-menu-item>
+                  <el-menu-item index="5">
+                  <i class="el-icon-menu"></i>
+                  <span slot="title">业务系统五</span>
+                  </el-menu-item>
+                  <el-menu-item index="6">
+                  <i class="el-icon-menu"></i>
+                  <span slot="title">业务系统六</span>
+                  </el-menu-item>
+                </el-menu>
+              </div>
+              <div class="right">
+                <el-form ref="form" :model="formLabelAlign" :label-position="labelPosition" label-width="160px" size="medium">
+                    <el-form-item label="业务系统名称">
+                      <el-input value=""></el-input>
+                    </el-form-item>
+                    <el-form-item label="数据源类型">
+                      <el-select v-model="formLabelAlign.region" placeholder="请选择">
+                        <el-option label="MYSQL" value="MYSQL"></el-option>
+                        <el-option label="ORACLE" value="ORACLE"></el-option>
+                        <el-option label="DB2" value="DB2"></el-option>
+                        <el-option label="IMPALA" value="IMPALA"></el-option>
+                        <el-option label="HIVE" value="HIVE"></el-option>
+                        <el-option label="POSTGRESQL" value="POSTGRESQL"></el-option>
+                      </el-select>
+                    </el-form-item>							  
+                    <el-form-item label="URL">
+                      <el-input value="<ip>:<port>"></el-input>
+                    </el-form-item>
+                    <el-form-item label="用户名">
+                      <el-input value=""></el-input>
+                    </el-form-item>
+                    <el-form-item label="默认数据库">
+                      <el-input value=""></el-input>
+                    </el-form-item>
+                    <el-form-item label="数据库字符集">
+                      <el-input value=""></el-input>
+                    </el-form-item>
+              </el-form>	   
+              </div>     
+    </div>  
+    <script src="../lib/vue.js"></script>
+    <script src="../lib/element.js"></script>
+    <script src="../lib/axios.min.js"></script>
+    <script src="../dist/js/build/datasrc.js"></script>
+    <!-- <script src="lib/require.min.js" defer async="true" data-main="main"></script> -->
+</body>
+</html>

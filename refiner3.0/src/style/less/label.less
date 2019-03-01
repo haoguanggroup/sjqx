@@ -1,0 +1,41 @@
+@import url(resize.less);
+@import url(public.less);
+html,body{
+    background: #fff;
+    height: 100%;
+    // overflow: scroll;
+
+
+    #app{
+        height: 100%;
+       .el-container{
+        height: 100%;
+        display: flex;
+       }
+        .el-aside{
+            padding: 10px 20px 10px 20px;
+            overflow: auto;
+            border: 1px solid #ccc; 
+            overflow-x:hidden;
+        }
+        .right{
+            padding: 10px 20px 10px 20px;
+            overflow: auto;
+            border: 1px solid #ccc; 
+            border-left:none; 
+            overflow-x:hidden;
+            width: 80%;
+            .addLabelForm{
+                height:230px;display: flex;flex-wrap: wrap;border: 1px solid #ccc;padding: 10px 5px;
+                overflow: auto;
+                margin: 10px 0;
+                position: relative;
+                .item{
+                    position: absolute;
+                    right: 10px;
+                    top:10px;
+                }
+            }
+        }
+    }
+}

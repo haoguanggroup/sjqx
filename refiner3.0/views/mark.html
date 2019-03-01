@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>标签管理</title>
+    <link rel="stylesheet" href="../lib/element.min.css">
+    <link rel="stylesheet" href="../dist/css/datasrc.css">  
+    <link rel="stylesheet" href="../dist/css/business.css">
+    <script src="../lib/public.js"></script>
+<style> 
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+    background-color: rgb(51, 58, 66);
+  }
+
+  .el-row {
+    outline:0;
+  }
+  .el-col {
+    border-radius: 4px;
+  }
+  .grid-content {
+    border-radius: 4px;
+    min-height: 36px;
+  font-size: 24px;
+  color: #1a1a1a;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  }
+ .el-menu .el-menu-item{height:40px;line-height:40px;}
+ .el-menu-item{height:40px;line-height:40px;padding:0px;}
+ .el-menu-item [class^=el-icon-]{font-size:20px;}
+
+</style>
+</head>
+<body>
+    <div id="app">
+        <div class="addBtn">
+      <el-button style="background: #f56c6c;color: #fff" type="danger"
+        icon="el-icon-plus" size="small" plain @click="initYwbqdx">新增标签管理</el-button>
+      <el-button style="background: #f56c6c;color: #fff" plain type="danger" icon="el-icon-back" size="small" onclick="location.href='bqk.html'">返回</el-button>
+    </div>
+        <h4 style='line-height: 20px; margin: 0px 0 10px 0; width: 100%; position: fixed'>
+            <span style="display: inline-block; width: 6px; height: 16px; background: #ee303d;">&nbsp;</span>
+            &nbsp; 标签管理
+          </h4>
+              <div class="left">
+                <el-menu  class="el-menu-vertical-demo" @select="handleOpen" @open="handleOpen" @close="handleOpen" background-color="#fff" text-color="#333" active-text-color="#ee303d">
+                  <el-submenu v-for="item in sjys" :index="item.sjydm" >
+                    <template slot="title">
+                      <i class="el-icon-menu"></i>
+                      <span>{{item.sjymc}}</span>
+                    </template>
+                    <el-menu-item v-for="ywdx in item.ywdxs" :index="ywdx.bqywdx">
+                        <i class="el-icon-document"></i>
+                        <span>{{ywdx.bqywdxmc}}</span>                     
+                    </el-menu-item>
+                  </el-submenu>
+                </el-menu>
+              </div>
+              <div class="right">
+                 <el-form ref="ywbqdx" :model="ywbqdx" label-position="right" label-width="160px" size="medium">
+                 
+                  <el-form-item label="所属业务对象">
+                    <el-input style="display:none;" v-model="ywbqdx.sjydm"></el-input>
+                    <el-select v-model="ywbqdx.sjywdx" @change="changeSjywdx" :disabled="viewCtr.sjywdx_dis" placeholder="请选择">
+                        <el-option v-for="item in sjywdxs" :label="item.sjywdxmc" :value="item.sjywdx"></el-option>
+                    </el-select>
+                  </el-form-item>
+                  <el-form-item label="标签业务对象">
+                    <el-input v-model="ywbqdx.bqywdx" :disabled="viewCtr.bqywdx_dis" @change="setInput('0')">
+                      <el-button slot="append" icon="el-icon-edit" @click="setInput('1')"></el-button>
+                    </el-input>
+                  </el-form-item>
+                  <el-form-item label="标签业务名称">
+                    <el-input v-model="ywbqdx.bqywdxmc" :disabled="viewCtr.bqywdx_dis" @change="setInput('0')">
+                      <el-button slot="append" icon="el-icon-edit" @click="setInput('1')"></el-button>
+                    </el-input>
+                  </el-form-item>
+
+                  <el-form-item label="">
+                  
+                 <el-button style="background: #f56c6c;color: #fff" plain type="danger" icon="el-icon-plus" size="small" @click="exec('newLable')" :disabled="viewCtr.addMark_dis" >新增标签字段</el-button>
+
+                   <el-table :data="ywbqdx.tags" border  style="width:96%;" height="360" size="mini">
+                     <el-table-column type="index" fixed>
+                     </el-table-column>
+                        <el-table-column prop="zdlx" fixed label="字段类型">
+                          <template slot-scope="scope">
+                            <el-tag :type="scope.row.zdlx === '1' ? 'primary' : 'success'"
+                              disable-transitions>{{scope.row.zdlx=='1'?'主键':'标签'}}</el-tag>
+                          </template>
+                        </el-table-column>
+                        <el-table-column prop="zdm" fixed label="字段" ></el-table-column>
+                        <el-table-column prop="bqbm" label="标签/主键编码"></el-table-column>
+                        <el-table-column prop="zdzj" label="字段注解" show-overflow-tooltip width="200" ></el-table-column>
+                        <el-table-column prop="zdsjlx" label="字段数据类型" ></el-table-column>
+                        <el-table-column prop="zdsjcd" label="字段数据长度" ></el-table-column>             
+                        <el-table-column prop="cjr" label="创建人"></el-table-column>
+                        <el-table-column prop="cjsj" label="创建时间"></el-table-column>
+                        <el-table-column label="操作" width="140" >
+                            <template slot-scope="scope" >
+                                <el-button v-show="scope.row.zdlx=='2'" type="text" size="small" style="color:#409EFF;" @click="exec('modfiyMark',scope.row.zdm)">编辑</el-button>
+                                <el-button v-show="scope.row.zdlx=='2'" type="text" size="small" style="color:#409EFF;" @click="exec('deleteMark',scope.row.zdm)" >删除</el-button>
+                                <el-button v-show="scope.row.zdlx=='2'" type="text" size="small" style="color:#409EFF;" @click="exec('olnyShow',scope.row.zdm)">查看</el-button>
+                                
+                            </template>
+                        </el-table-column>
+                    </el-table>  
+                    </el-form-item>
+
+                    <el-form-item label="">
+                    <el-button style="margin-right:100px;color: #fff;background: #409EFF" type="primary" icon="el-icon-document"
+                            @click="exec('save')" size="small" plain v-show="viewCtr.isShowSave" >保存</el-button>
+                    <el-button style="background: #f56c6c;color: #fff" plain type="danger" v-show="viewCtr.isShowDelete" icon="el-icon-delete" size="small" @click="exec('delete')" >删除</el-button>
+                    </el-form-item> 
+                </el-form>     
+              </div>  
+                <!-- 编辑弹窗 -->
+              <el-dialog :title="viewCtr.dialogTitle" :visible.sync="viewCtr.showDialog" :close-on-click-modal="false">
+                  <el-form :model="ywbqdxBq" style="height: 100%" label-position="right" label-width="100px" size="medium">  
+                      <el-form-item label="标签值" v-show="kscsz.length>0">
+                        <el-tag v-for="item in kscsz" type="danger">({{item.zdm}}){{item.zmc}}</el-tag>
+                      </el-form-item>
+                      <el-form-item label="标签" >
+                        <el-select v-model="ywbqdxBq.bqbm" :disabled="viewCtr.olnyShow" placeholder="请选择" @change="changeBqbm">
+                          <el-option v-for="item in bkq" :label="item.bqmc" :value="item.bqbm"></el-option>
+                        </el-select>
+                      </el-form-item>
+                      
+                      <el-form-item label="字段名" maxlength='50'>
+                          <el-input v-model="ywbqdxBq.lsh" style="display:none;" ></el-input>
+                          <el-input v-model="ywbqdxBq.glbm" style="display:none;" ></el-input>
+                          <el-input v-model="ywbqdxBq.sjydm" style="display:none;" ></el-input>
+                          <el-input v-model="ywbqdxBq.bqywdx" style="display:none;" ></el-input>
+                          <el-input v-model="ywbqdxBq.zdlx" style="display:none;" ></el-input>
+                          <el-input v-model="ywbqdxBq.sxh" style="display:none;" ></el-input>
+                          <el-input v-model="ywbqdxBq.zdm" :disabled="viewCtr.olnyShow"></el-input>
+                      </el-form-item>
+                      <el-form-item label="字段注解" >
+                        <el-input v-model="ywbqdxBq.zdzj" maxlength='200' :disabled="viewCtr.olnyShow"></el-input>
+                      </el-form-item>
+                      <el-form-item label="数据类型" >
+                        <el-select v-model="ywbqdxBq.zdsjlx" placeholder="请选择" @change="changeSjlx" :disabled="viewCtr.olnyShow">
+                          <el-option v-for="item in syssjlx" :key="item.zdm" :label="item.zmc" :value="item.zdm"></el-option>
+                        </el-select>
+                      </el-form-item>
+                      <el-form-item :label="viewCtr.lbl_sjcd" v-show="viewCtr.isShowZswcd">
+                        <el-input-number v-model="ywbqdxBq.zdsjcd1" :min="1" :max="viewCtr.zdsjzdcd" :disabled="viewCtr.olnyShow"></el-input-number>
+                      </el-form-item>
+                      <el-form-item label="小数位长度" v-show="viewCtr.isShowXswcd">
+                        <el-input-number v-model="ywbqdxBq.zdsjcd2" :min="0" :max="10" :disabled="viewCtr.olnyShow"></el-input-number>
+                      </el-form-item>
+                  </el-form>
+                  <div slot="footer" class="dialog-footer">
+                      <el-button @click="viewCtr.showDialog = false" size="small" >关 闭</el-button>
+                      <el-button type="primary" v-show="!viewCtr.olnyShow" @click="exec('addYwbqdx')" size="small"  >确 定</el-button>
+                  </div>
+              </el-dialog> 
+     
+
+    </div>  
+    <script src="../lib/vue.js"></script>
+    <script src="../lib/element.js"></script>
+    <script src="../lib/axios.min.js"></script>
+    <script src="../dist/js/build/mark.js"></script>
+</body>
+</html>

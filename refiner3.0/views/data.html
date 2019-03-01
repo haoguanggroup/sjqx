@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../lib/element.css">
+    <script src="../lib/public.js"></script>
+    <link rel="stylesheet" href="../dist/css/data.css">
+    <script src="../lib/axios.min.js"></script>
+    <script src="../lib/vue.js"></script>
+    <script src="../lib/element.js"></script>
+    <style>
+     .el-table th,.el-table th>.cell{
+                color: #666;
+                background: #e4e8f2;
+                    line-height: 30px;  
+                    text-align: center;                 
+            }
+    
+                .el-pagination{
+               text-align: center;
+            }
+            .el-main{
+                margin: 0;
+                padding: 0;
+            }
+            .el-form{
+                height: 40px;
+            }
+            .el-row,.el-row div{
+                height: 40px;
+            }
+           
+    </style>
+</head>
+<body>
+    <div id="app">
+            <h4 style='width: 100%;margin: 0 0 10px 0'> <span style="display:inline-block;width:6px;height:16px;background: #ee303d;">&nbsp;</span>  &nbsp; 码值管理</h4>        
+            <hr class="hr5">     
+            <el-container style="pading:0;width:100%">
+                    <el-main style="overflow-y:auto">
+                        <el-main>
+                            <el-breadcrumb separator="/">
+                              <!-- <el-breadcrumb-item>码表</el-breadcrumb-item> -->
+                            </el-breadcrumb>
+                            <!-- <hr class="hr5"> -->
+                            <el-form :inline="true" :model="jdmbcx" class="demo-form-inline">
+                                <el-row>
+                                  <el-col :span="6">
+                                      <el-form-item label="参数名称">
+                                            <el-input size="small" v-model="jdmbcx.csmc" placeholder="参数名称"></el-input>
+                                      </el-form-item>
+                                  </el-col>
+                                  <el-col :span="6">
+                                      <el-form-item label="值代码">
+                                            <el-input size="small" v-model="jdmbcx.zdm" placeholder="值代码"></el-input>
+                                      </el-form-item>
+                                  </el-col>
+                                  <el-col :span="6">
+                                      <el-form-item label="值名称 ">
+                                            <el-input size="small" v-model="jdmbcx.zmc" placeholder="值名称 "></el-input>
+                                      </el-form-item>
+                                  </el-col>
+                                  <el-col :span="6" style="text-align:right">
+                                      <el-form-item style="margin-left: 40px">
+                                            <el-button size="small" type="danger el-button--100" @click="execJdmb('selectJdmb')" icon="el-icon-search">查询</el-button>
+                                            <el-button size="small" type="danger el-button--100" @click="execJdmb('newLable')" icon="el-icon-plus" size="small">新增码值</el-button> 
+                                      </el-form-item>
+                                  </el-col>
+                                </el-row>
+                            </el-form>
+                            <hr style="border: 0px;
+                            height: 1px;
+                            border-top: 2px solid #f6f6f3;margin-top: 15px">
+                            <el-table :data="jdmbData" border  style="width:100%" size="mini">
+                                                        
+                                <el-table-column prop="csmc" label="参数名称" :show-overflow-tooltip="true"></el-table-column>
+                                <el-table-column prop="csdm" label="参数代码" ></el-table-column>
+                                <el-table-column prop="zmc" label="值名称 " :show-overflow-tooltip="true"></el-table-column>
+                                <el-table-column prop="zdm" label="值代码" ></el-table-column>
+                                <el-table-column prop="sxh" label="顺序号" ></el-table-column>						
+                                <el-table-column prop="cjr" label="创建人"></el-table-column>
+                                <el-table-column prop="cjsj" label="创建时间" width="180"></el-table-column>
+                                <el-table-column prop="yxbz" label="有效标志" width="80" >
+                                    <template slot-scope="scope" >
+                                        <el-tag type="primary" size="small" >有效</el-tag>
+                                    </template>
+                                </el-table-column>
+                                <el-table-column prop="name" label="操作" width="140" >
+                                    <template slot-scope="scope">
+                                        <el-button type="text" size="small" style="color:#409EFF;" @click="execJdmb('editJdmb',scope.row)">编辑</el-button>
+                                        <el-button type="text" size="small" style="color:#409EFF;" @click="execJdmb('showJdmb',scope.row)">查看</el-button>
+                                        
+                                        <el-button type="text" size="small" style="color:#409EFF;" @click="execJdmb('deleteJdmb',scope.row)">删除</el-button>
+            
+                                    </template>
+                                </el-table-column>
+                            </el-table>
+                            <!-- 分页 -->
+                            <el-pagination
+                                @size-change="handleSizeChangeJdmb"
+                                @current-change="handleCurrentChangeJdmb"
+                                :page-sizes="pager.selPageSize"
+                                :page-size="pager.pageSize"
+
+                                layout="total, sizes, prev, pager, next, jumper"
+                                :total="pager.total"
+                            ></el-pagination>
+                            <!-- <hr> -->
+                            <div style="height: 80px"></div>
+                        </el-main>
+                    </el-main>                  
+                    <!-- 弹窗 -->
+                    <el-dialog :title="dialogTitle" :visible.sync="jdmbDialogVisible" :close-on-click-modal="false">
+                        <el-form :model="jdmb" style="height: 100%">
+                            <el-form-item label="参数代码" :label-width="formLabelWidth" style="width: 90%" prop="csdm">
+                                <el-input v-model="jdmb.csdm" autocomplete="off" placeholder="请填写参数代码" :disabled="jdmbDisabled"></el-input>
+                            </el-form-item>
+                            <el-form-item label="参数名称" :label-width="formLabelWidth" style="width: 90%" prop="csmc">
+                                <el-input v-model="jdmb.csmc" autocomplete="off" placeholder="请填写参数名称"></el-input>
+                            </el-form-item>
+                            <el-form-item label="值代码" :label-width="formLabelWidth" style="width: 90%" prop="zdm">
+                                <el-input v-model="jdmb.zdm" autocomplete="off" placeholder="请填写值代码" :disabled="jdmbDisabled"></el-input>
+                            </el-form-item>
+                            <el-form-item label="值名称" :label-width="formLabelWidth" style="width: 90%" prop="zmc">
+                                <el-input v-model="jdmb.zmc" autocomplete="off" placeholder="请填写值名称"></el-input>
+                            </el-form-item>
+                            <el-form-item label="顺序号" :label-width="formLabelWidth" style="width: 90%" prop="sxh">
+                                <el-input v-model.number="jdmb.sxh" autocomplete="off" placeholder="请填写顺序号"></el-input>
+                            </el-form-item>
+                        </el-form>
+                        <div slot="footer" class="dialog-footer" style="width: 100%">
+                            <el-button @click="jdmbDialogVisible = false;" size="small" >关 闭</el-button>
+                            <el-button type="primary" v-show="!olnyShow" @click="execJdmb('saveorupdate')" size="small"  >确 定</el-button>
+                        </div>
+                    </el-dialog>
+                </el-container>
+    </div>
+    <script src="../dist/js/build/data.js"></script>
+   
+</body>
+</html>

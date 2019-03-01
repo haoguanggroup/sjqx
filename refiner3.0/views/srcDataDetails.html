@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="../lib/element.css">
+    <script src="../lib/public.js"></script>
+    <link rel="stylesheet" href="../dist/css/srcDataDetails.css">
+    <script src="../lib/axios.min.js"></script>
+    <script src="../lib/vue.js"></script>
+    <script src="../lib/element.js"></script>
+</head>
+<style>
+.el-table th,.el-table th>.cell{
+                color: #666;
+                background: #e4e8f2;
+                    line-height: 30px;                   
+            }
+.hr5 {
+            border: 0px;
+            height: 1px;
+            border-top: 5px solid #f6f6f3;
+            }
+            .el-col{
+                height: 50px;   
+            }
+            .el-pagination{
+               text-align: center;
+            }
+</style>
+<body>
+    <div id="app">      
+        <h4 style='line-height: 20px;margin:0px 0 10px 0;width: 100%;'> <span style="display:inline-block;width:6px;height:16px;background: #ee303d;">&nbsp;</span>  &nbsp; 任务监控</h4>        
+        <hr class="hr5">  
+            <el-container style="pading:0;width:100%">
+            <el-main style="overflow-y:auto;padding: 0">
+                <el-main style="padding: 0">
+                    <el-form :inline="true" :model="selectRwjk" class="demo-form-inline" style="height: 40px">
+                        <el-row style="height: 40px">
+                            <el-col :span="6">
+                                <el-form-item label="业务名称">
+                                    
+                                    <el-select v-model="selectRwjk.ywmc" placeholder="请选择" size="small"  style="width:100%">
+                                            <el-option
+                                              v-for="item in ywmcOptions"
+                                              :key="item.value"
+                                              :label="item.label"
+                                              :value="item.label">
+                                            </el-option>
+                                          </el-select>
+                                </el-form-item>
+                                
+                            </el-col>
+                            <el-col :span="6">
+                                <el-form-item label="处理文件">
+                                    <el-input size="small" v-model="selectRwjk.clwj" placeholder="请输入内容" style="width:100%"></el-input>
+                                </el-form-item>
+                            </el-col>
+                            <el-col :span="9">
+                            <el-form-item label="执行时间">
+                                <!-- <el-date-picker
+                                size="small"
+                                    v-model="selectRwjk.zxsj"
+                                    type="daterange"
+                                    start-placeholder="开始日期"
+                                    end-placeholder="结束日期"
+                                    :default-time="['00:00:00', '23:59:59']">
+                                </el-date-picker> -->
+                                <div style="display: flex">  
+                                    <div class="block">
+                                        <el-date-picker
+                                        v-model="selectRwjk.kssj"
+                                        type="datetime"
+                                        placeholder="开始时间" size="small" style="width:170px">
+                                        </el-date-picker>                                   
+                                    </div>
+                                    <div class="block">
+                                        <el-date-picker
+                                            v-model="selectRwjk.jssj"
+                                            type="datetime"
+                                            placeholder="结束时间" size="small" style="width:170px">
+                                        </el-date-picker>
+                                    </div>
+                                </div>
+                            </el-form-item>
+                            </el-col>
+                            <el-col :span="2" style="text-align:right">
+                                <el-form-item>
+                                    <el-button size="small" type="danger el-button--100" @click="selectAllRwjkData" icon="el-icon-search">查询</el-button>
+                                </el-form-item>
+                            </el-col>
+                        </el-row>
+                    </el-form> 
+           <hr style="border: 0px;
+           height: 1px;
+           border-top: 2px solid #f6f6f3;margin-top: 15px">           
+                    <el-table :data="RwjkData" border  style="width:100%;margin-top: 5px" size="mini" >
+                        <!-- <el-table-column prop="ywbm" label="业务编码" :show-overflow-tooltip="true"></el-table-column> -->
+                        <el-table-column prop="ywmc" label="业务名称" :show-overflow-tooltip="true" ></el-table-column>
+                        <el-table-column prop="clwjbm" label="处理文件编码 " :show-overflow-tooltip="true"></el-table-column>
+                        <el-table-column prop="qddclwjm" label="启动的处理文件名 " :show-overflow-tooltip="true"></el-table-column>
+                        <el-table-column prop="hdzt" label="活动状态" width="120">
+                            <template slot-scope="scope">
+                                <el-tag v-if="scope.row.hdzt=='2'" type="primary" size="small" >已完成</el-tag>
+                                <el-tag v-if="scope.row.hdzt=='1'" type="primary" size="small" >正在进行</el-tag>
+                                <el-tag v-if="scope.row.hdzt=='3'" type="primary" size="small" >失败</el-tag>
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="kssj" label="开始时间"  width="180"></el-table-column>						
+                        <el-table-column prop="jssj" label="结束时间"  width="180"></el-table-column>
+                        
+                        <el-table-column prop="name" label="操作" width="160" >
+                            <template slot-scope="scope">
+                                <el-button type="text" size="small" ><a  style="text-decoration:none;color:#409EFF;" :href="scope.row.hdzt ==='已完成'?'../views/dataDetails.html':'../views/dataDetailsing.html'">查看详情</a></el-button>			
+                                <!-- <el-button type="text" size="small" ><a style="text-decoration:none;" href="#"></a>{{scope.row.cz}}</el-button> -->
+                                <el-button v-if="scope.row.hdzt=='2'" type="text" size="small" style="color:#409EFF;" @click="deleteYwclwj(scope.row.clwjbm)">删除</el-button> 
+                                <el-button v-if="scope.row.hdzt=='1'"  type="text" size="small" style="color:#409EFF;" @click="stopYwclwj(scope.row.clwjbm)">停止</el-button>                                 
+                            </template>
+                        </el-table-column>
+                    </el-table>
+
+                    
+                    <!-- 分页 -->
+                    <el-pagination
+                        @size-change="handleSizeChange"
+                        @current-change="handleCurrentChange"
+                        :page-sizes="Pager"
+                        :page-size="1"
+                        layout="total, sizes, prev, pager, next, jumper"
+                        :total="total">
+                    </el-pagination>
+                </el-main>
+            </el-main>
+        </el-container>
+</div>
+<script src="../dist/js/build/srcDataDetails.js"></script>
+
+</body>
+</html>
